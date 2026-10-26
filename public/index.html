@@ -71,11 +71,11 @@
 <a class="op-skip" href="#inhalt">Zum Inhalt springen</a>
 
 <!-- Topbar -->
-<div class="k-topbar"><div class="k-container">
+<aside class="k-topbar" aria-label="Öffnungszeiten, Adresse und Telefon"><div class="k-container">
 <span><span class="k-icon" aria-hidden="true">schedule</span> Mo – Fr 07:30 – 17:30 Uhr</span>
 <span><span class="k-icon" aria-hidden="true">location_on</span> Gartenstraße 115, 63225 Langen (Hessen)</span>
 <span><span class="k-icon" aria-hidden="true">call</span> <a href="tel:+49610322011">06103 / 22011</a></span>
-</div></div>
+</div></aside>
 
 <!-- Header -->
 <header class="k-header"><div class="k-container">
@@ -140,50 +140,21 @@
 </div>
 </div></section>
 
-<!-- Leistungen: die Anker werden später zu eigenen Landingpages -->
+<!-- Leistungen -->
 <section class="k-section k-section--tint" id="leistungen"><div class="k-container">
 <div class="k-section-head">
-<p class="k-eyebrow">Leistungen</p>
 <h2 class="k-h2">Gutachten und Prüfungen vom KFZ-Sachverständigen in Langen</h2>
 <p class="k-lead">Von der Unfallaufnahme bis zur Bewertung eines Oldtimers – jedes Gutachten nachvollziehbar dokumentiert und verständlich erklärt.</p>
 </div>
-<div class="k-grid k-grid--3">
-<a class="k-card k-card--link" id="kfz-schadengutachten" href="#kfz-schadengutachten" style="text-decoration: none; color: inherit">
-<div class="k-card-icon"><span class="k-icon" aria-hidden="true">car_crash</span></div>
-<h3 class="k-h3">KFZ-Schadengutachten</h3>
-<p class="k-muted">Haftpflicht- und Kaskoschaden: Reparaturkosten, Wertminderung, Wiederbeschaffungswert und Nutzungsausfall – vollständig belegt.</p>
-<span class="k-link-arrow">Mehr erfahren <span class="k-icon" aria-hidden="true">arrow_forward</span></span>
-</a>
-<a class="k-card k-card--link" id="wertermittlung" href="#wertermittlung" style="text-decoration: none; color: inherit">
-<div class="k-card-icon"><span class="k-icon" aria-hidden="true">sell</span></div>
-<h3 class="k-h3">Wertermittlung &amp; Oldtimer</h3>
-<p class="k-muted">Fahrzeugbewertung und Schätzung für Kauf, Verkauf, Erbe oder Versicherung – inklusive Marktwertermittlung für Oldtimer.</p>
-<span class="k-link-arrow">Mehr erfahren <span class="k-icon" aria-hidden="true">arrow_forward</span></span>
-</a>
-<a class="k-card k-card--link" id="leasingrueckgabe" href="#leasingrueckgabe" style="text-decoration: none; color: inherit">
-<div class="k-card-icon"><span class="k-icon" aria-hidden="true">assignment_return</span></div>
-<h3 class="k-h3">Leasingrückgabe</h3>
-<p class="k-muted">Neutrale Zustandsbewertung vor der Rückgabe – damit Sie Nachforderungen des Leasinggebers sachlich prüfen können.</p>
-<span class="k-link-arrow">Mehr erfahren <span class="k-icon" aria-hidden="true">arrow_forward</span></span>
-</a>
-<a class="k-card k-card--link" id="gerichtsgutachten" href="#gerichtsgutachten" style="text-decoration: none; color: inherit">
-<div class="k-card-icon"><span class="k-icon" aria-hidden="true">gavel</span></div>
-<h3 class="k-h3">Gerichtsgutachten</h3>
-<p class="k-muted">Gutachten im Auftrag von Gerichten und Anwälten – sachlich, prüffähig und mit langjähriger Erfahrung als bestellte Sachverständige.</p>
-<span class="k-link-arrow">Mehr erfahren <span class="k-icon" aria-hidden="true">arrow_forward</span></span>
-</a>
-<a class="k-card k-card--link" id="fahrzeuggegenueberstellung" href="#fahrzeuggegenueberstellung" style="text-decoration: none; color: inherit">
-<div class="k-card-icon"><span class="k-icon" aria-hidden="true">compare_arrows</span></div>
-<h3 class="k-h3">Fahrzeuggegenüberstellung</h3>
-<p class="k-muted">Technischer Abgleich der Schadensbilder beider Fahrzeuge, um zu prüfen, ob ein geschilderter Unfallhergang plausibel ist.</p>
-<span class="k-link-arrow">Mehr erfahren <span class="k-icon" aria-hidden="true">arrow_forward</span></span>
-</a>
-<a class="k-card k-card--link" id="technische-beratung" href="#technische-beratung" style="text-decoration: none; color: inherit">
-<div class="k-card-icon"><span class="k-icon" aria-hidden="true">engineering</span></div>
-<h3 class="k-h3">Technische Beratung</h3>
-<p class="k-muted">Ingenieurwissen für Ihre Fragen rund ums Fahrzeug – vor dem Kauf, bei Mängeln oder im Streit mit der Werkstatt.</p>
-<span class="k-link-arrow">Mehr erfahren <span class="k-icon" aria-hidden="true">arrow_forward</span></span>
-</a>
+<!-- Leistungen: Die Anker werden später zu eigenen Landingpages; dann h3-Text verlinken. -->
+<ol class="op-services">
+<li class="op-service" id="kfz-schadengutachten"><h3>KFZ-Schadengutachten</h3><p>Haftpflicht- und Kaskoschaden: Reparaturkosten, Wertminderung, Wiederbeschaffungswert und Nutzungsausfall – vollständig belegt.</p></li>
+<li class="op-service" id="wertermittlung"><h3>Wertermittlung &amp; Oldtimer</h3><p>Fahrzeugbewertung und Schätzung für Kauf, Verkauf, Erbe oder Versicherung – inklusive Marktwertermittlung für Oldtimer.</p></li>
+<li class="op-service" id="leasingrueckgabe"><h3>Leasingrückgabe</h3><p>Neutrale Zustandsbewertung vor der Rückgabe – damit Sie Nachforderungen des Leasinggebers sachlich prüfen können.</p></li>
+<li class="op-service" id="gerichtsgutachten"><h3>Gerichtsgutachten</h3><p>Gutachten im Auftrag von Gerichten und Anwälten – sachlich, prüffähig und mit langjähriger Erfahrung als bestellte Sachverständige.</p></li>
+<li class="op-service" id="fahrzeuggegenueberstellung"><h3>Fahrzeuggegenüberstellung</h3><p>Technischer Abgleich der Schadensbilder beider Fahrzeuge, um zu prüfen, ob ein geschilderter Unfallhergang plausibel ist.</p></li>
+<li class="op-service" id="technische-beratung"><h3>Technische Beratung</h3><p>Ingenieurwissen für Ihre Fragen rund ums Fahrzeug – vor dem Kauf, bei Mängeln oder im Streit mit der Werkstatt.</p></li>
+</ol>
 <div class="op-feature" id="hauptuntersuchung">
 <div class="k-card-icon"><span class="k-icon" aria-hidden="true">fact_check</span></div>
 <div>
@@ -192,7 +163,6 @@
 <p>Im Namen und auf Rechnung der GTÜ (Gesellschaft für Technische Überwachung, amtlich anerkannte Überwachungsorganisation, Vor dem Lauch 25, 70567 Stuttgart, www.gtue.de) führen unsere Prüfingenieure amtliche Untersuchungen (z.B. Hauptuntersuchung nach § 29 StVZO, Änderungsabnahmen nach § 19 (3) StVZO, Begutachtung von Oldtimern gemäß § 23 StVZO etc.) durch. Rufen Sie uns an und vereinbaren Sie einen Termin.</p>
 </div>
 <a class="k-btn k-btn--ghost-light" href="#kontakt"><span class="k-icon" aria-hidden="true">event</span> HU-Termin anfragen</a>
-</div>
 </div>
 <div class="op-vehicles">
 <span class="op-vehicles-label">Wir begutachten:</span>
@@ -205,7 +175,6 @@
 <!-- Über uns -->
 <section class="k-section op-white" id="ueber-uns"><div class="k-container op-about">
 <div>
-<p class="k-eyebrow">Über uns</p>
 <h2 class="k-h2">Ein Ingenieur-Büro mit Geschichte in Langen</h2>
 <p class="k-lead">Seit Jahrzehnten vertrauen Autofahrer, Werkstätten, Anwälte und Gerichte in Langen und Umgebung auf unser Urteil. Heute führen Vater und Sohn das Büro gemeinsam.</p>
 <div class="op-people" style="grid-template-columns: minmax(0, 280px)">
@@ -241,18 +210,17 @@
 <li><strong>Mehr als die Reparatur:</strong> Wertminderung und Nutzungsausfall gehören ins Gutachten – wir erfassen sie vollständig.</li>
 </ul>
 </div>
-<div class="op-facts">
-<div class="op-fact"><div class="k-card-icon"><span class="k-icon" aria-hidden="true">balance</span></div><h3>Unabhängig</h3><p>Wir arbeiten in Ihrem Auftrag und sind keiner Versicherung verpflichtet.</p></div>
-<div class="op-fact"><div class="k-card-icon"><span class="k-icon" aria-hidden="true">verified_user</span></div><h3>Gerichtsfest</h3><p>Erfahrung als öffentlich bestellte Sachverständige – unsere Gutachten halten der Prüfung stand.</p></div>
-<div class="op-fact"><div class="k-card-icon"><span class="k-icon" aria-hidden="true">location_on</span></div><h3>In Langen oder vor Ort</h3><p>Besichtigung im Büro oder dort, wo Ihr Fahrzeug steht – im Rhein-Main-Gebiet.</p></div>
-<div class="op-fact"><div class="k-card-icon"><span class="k-icon" aria-hidden="true">support_agent</span></div><h3>Persönlich</h3><p>Sie sprechen direkt mit Dieter oder Dietmar Komp – kein Callcenter.</p></div>
-</div>
+<ul class="op-facts">
+<li class="op-fact"><h3><span class="k-icon" aria-hidden="true">balance</span>Unabhängig</h3><p>Wir arbeiten in Ihrem Auftrag und sind keiner Versicherung verpflichtet.</p></li>
+<li class="op-fact"><h3><span class="k-icon" aria-hidden="true">verified_user</span>Gerichtsfest</h3><p>Erfahrung als öffentlich bestellte Sachverständige – unsere Gutachten halten der Prüfung stand.</p></li>
+<li class="op-fact"><h3><span class="k-icon" aria-hidden="true">location_on</span>In Langen oder vor Ort</h3><p>Besichtigung im Büro oder dort, wo Ihr Fahrzeug steht – im Rhein-Main-Gebiet.</p></li>
+<li class="op-fact"><h3><span class="k-icon" aria-hidden="true">support_agent</span>Persönlich</h3><p>Sie sprechen direkt mit Dieter oder Dietmar Komp – kein Callcenter.</p></li>
+</ul>
 </div></section>
 
 <!-- Ablauf -->
 <section class="k-section k-section--navy op-steps4" id="ablauf"><div class="k-container">
 <div class="k-section-head">
-<p class="k-eyebrow">Ablauf</p>
 <h2 class="k-h2">Vom Anruf bis zur Regulierung</h2>
 </div>
 <ol class="k-steps">
@@ -263,10 +231,9 @@
 </ol>
 </div></section>
 
-<!-- Kundenstimmen: [BEWERTUNGEN] echte Google-Bewertungen (mit Einverständnis) einsetzen -->
-<section class="k-section op-white" id="bewertungen"><div class="k-container">
+<!-- Kundenstimmen: [BEWERTUNGEN] echte Google-Bewertungen (mit Einverständnis) einsetzen, dann das hidden-Attribut entfernen -->
+<section class="k-section op-white" id="bewertungen" hidden><div class="k-container">
 <div class="k-section-head k-section-head--center">
-<p class="k-eyebrow">Kundenstimmen</p>
 <h2 class="k-h2">Das sagen unsere Kunden</h2>
 </div>
 <div class="k-grid k-grid--3">
@@ -294,7 +261,6 @@
 <section class="k-section k-section--tint" id="faq"><div class="k-container op-faq-grid">
 <div>
 <div class="k-section-head">
-<p class="k-eyebrow">FAQ</p>
 <h2 class="k-h2">Häufige Fragen an den KFZ-Gutachter</h2>
 </div>
 <div class="k-faq">
@@ -321,7 +287,6 @@
 <!-- Schaden melden + Einsatzgebiet -->
 <section class="k-section k-section--mist" id="schaden-melden"><div class="k-container k-split">
 <div>
-<p class="k-eyebrow">Schaden melden</p>
 <h2 class="k-h2">Schildern Sie uns Ihren Schaden</h2>
 <p class="k-lead">Wir melden uns innerhalb unserer Öffnungszeiten und vereinbaren einen Besichtigungstermin.</p>
 <ul class="k-arrows" style="margin-top: var(--space-5)">
@@ -391,12 +356,12 @@
 <p>KFZ-Sachverständigen-Büro für Kraftfahrzeugschäden und Kraftfahrzeugbewertungen in Langen (Hessen). Ihr Partner im Rhein-Main-Gebiet.</p>
 </div>
 <div>
-<h4>Kontakt</h4>
+<h2 class="op-footer-h">Kontakt</h2>
 <p>Ingenieur-Büro Komp<br>Gartenstraße 115<br>63225 Langen (Hessen)</p>
 <ul><li>Tel. <a href="tel:+49610322011">06103 / 22011</a></li><li>Fax 06103 / 22090</li><li><a href="mailto:komp@kfz-ing.de">komp@kfz-ing.de</a></li></ul>
 </div>
 <div>
-<h4>Leistungen</h4>
+<h2 class="op-footer-h">Leistungen</h2>
 <ul>
 <li><a href="#kfz-schadengutachten">KFZ-Schadengutachten</a></li>
 <li><a href="#wertermittlung">Wertermittlung &amp; Oldtimer</a></li>
@@ -408,9 +373,9 @@
 </ul>
 </div>
 <div>
-<h4>Öffnungszeiten</h4>
+<h2 class="op-footer-h">Öffnungszeiten</h2>
 <p>Montag – Freitag<br>07:30 – 17:30 Uhr</p>
-<h4 style="margin-top: var(--space-5)">Einsatzgebiet</h4>
+<h2 class="op-footer-h" style="margin-top: var(--space-5)">Einsatzgebiet</h2>
 <p>Langen, Egelsbach, Dreieich, Neu-Isenburg, Darmstadt, Frankfurt und Umgebung</p>
 </div>
 </div>
@@ -421,10 +386,10 @@
 </div></footer>
 
 <!-- Mobile Call-Bar -->
-<div class="op-callbar"><div class="k-callbar">
+<nav class="op-callbar" aria-label="Schnellkontakt"><div class="k-callbar">
 <a class="k-btn k-btn--secondary" href="tel:+49610322011"><span class="k-icon" aria-hidden="true">call</span> Anrufen</a>
 <a class="k-btn k-btn--primary" href="#schaden-melden"><span class="k-icon" aria-hidden="true">car_crash</span> Schaden melden</a>
-</div></div>
+</div></nav>
 
 </div>
 <script src="js/main.js" defer></script>
