@@ -9,6 +9,12 @@ declare(strict_types=1);
 use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
 
+// Warnungen und Hinweise nie in die Antwort schreiben (sie würden das JSON für das Formular zerstören),
+// sondern nur ins Fehlerlog; verirrte Ausgaben werden gepuffert und vor der Antwort verworfen.
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+ob_start();
+
 $wantsJson = strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false;
 $debug = false;
 
@@ -22,6 +28,10 @@ function antworten(bool $ok, string $fehler = '', bool $bestaetigung = false, st
             $fehler .= ' [Diagnose: ' . $ursache . ']';
         }
     }
+    $streuausgabe = trim((string) ob_get_clean());
+    if ($streuausgabe !== '') {
+        error_log('Schadensformular: unerwartete Ausgabe verworfen: ' . substr($streuausgabe, 0, 500));
+    }
     if ($wantsJson) {
         http_response_code($ok ? 200 : 422);
         header('Content-Type: application/json; charset=utf-8');
@@ -31,6 +41,12 @@ function antworten(bool $ok, string $fehler = '', bool $bestaetigung = false, st
     }
     exit;
 }
+
+// Jeder unerwartete Fehler wird zur normalen Fehlermeldung, im Diagnosemodus mit Ursache
+set_exception_handler(function (Throwable $e) {
+    antworten(false, 'Die Meldung konnte nicht gesendet werden. Bitte rufen Sie uns an: 06103 / 22011.', false,
+        get_class($e) . ': ' . $e->getMessage() . ' in ' . basename($e->getFile()) . ':' . $e->getLine());
+});
 
 /** Text aus dem POST holen: getrimmt, ohne Steuerzeichen, gekürzt. */
 function feld(string $name, int $max, bool $mehrzeilig = false): string
