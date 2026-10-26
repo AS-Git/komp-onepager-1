@@ -9,13 +9,19 @@ declare(strict_types=1);
 use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
 
-require __DIR__ . '/../vendor/autoload.php';
+$wantsJson = strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false;
+$debug = false;
 
-$wantsJson = str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
-
-function antworten(bool $ok, string $fehler = '', bool $bestaetigung = false): never
+function antworten(bool $ok, string $fehler = '', bool $bestaetigung = false, string $ursache = ''): void
 {
-    global $wantsJson;
+    global $wantsJson, $debug;
+    if ($ursache !== '') {
+        error_log('Schadensformular: ' . $ursache);
+        // Diagnosemodus ('debug' => true in config.php): Ursache auch im Formular anzeigen
+        if ($debug) {
+            $fehler .= ' [Diagnose: ' . $ursache . ']';
+        }
+    }
     if ($wantsJson) {
         http_response_code($ok ? 200 : 422);
         header('Content-Type: application/json; charset=utf-8');
@@ -33,7 +39,8 @@ function feld(string $name, int $max, bool $mehrzeilig = false): string
     $wert = $mehrzeilig
         ? preg_replace('/[^\P{C}\n\t]/u', '', str_replace("\r\n", "\n", $wert))
         : preg_replace('/\p{C}/u', ' ', $wert);
-    return mb_substr((string) $wert, 0, $max);
+    // ohne mbstring-Abhängigkeit auf $max Zeichen kürzen
+    return preg_replace('/^(.{0,' . $max . '}).*$/us', '$1', (string) $wert);
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
@@ -41,12 +48,22 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     exit;
 }
 
-$configFile = __DIR__ . '/../config/config.php';
+$nichtErreichbar = 'Das Formular ist gerade nicht erreichbar. Bitte rufen Sie uns an: 06103 / 22011.';
+// config/ und vendor/ liegen eine Ebene über dem Webroot; liegen sie (notgedrungen) daneben, geht es auch
+$basis = is_dir(__DIR__ . '/../config') || is_dir(__DIR__ . '/../vendor') ? __DIR__ . '/..' : __DIR__;
+$configFile = $basis . '/config/config.php';
 if (!is_file($configFile)) {
-    error_log('Schadensformular: config/config.php fehlt');
-    antworten(false, 'Das Formular ist gerade nicht erreichbar. Bitte rufen Sie uns an: 06103 / 22011.');
+    $debug = true; // ohne Config gibt es nichts Geheimes zu verraten
+    antworten(false, $nichtErreichbar, false, 'config.php fehlt (erwartet unter ' . realpath($basis) . '/config/config.php)');
 }
 $config = require $configFile;
+$debug = !empty($config['debug']);
+
+$autoload = $basis . '/vendor/autoload.php';
+if (!is_file($autoload)) {
+    antworten(false, $nichtErreichbar, false, 'vendor/autoload.php fehlt – composer install --no-dev ausführen und vendor/ hochladen');
+}
+require $autoload;
 
 // Spamschutz: Honeypot gefüllt oder in unter 3 Sekunden ausgefüllt -> still verwerfen.
 // t = Ausfülldauer in ms, von js/main.js gesetzt; ohne JavaScript leer.
@@ -99,16 +116,22 @@ function mailer(array $config): PHPMailer
     $mail->isSMTP();
     $mail->Host       = $config['smtp']['host'];
     $mail->Port       = (int) $config['smtp']['port'];
-    $mail->SMTPSecure = match ($config['smtp']['secure']) {
-        'ssl'   => PHPMailer::ENCRYPTION_SMTPS,
-        'none'  => '',
-        default => PHPMailer::ENCRYPTION_STARTTLS,
-    };
+    $secure = [
+        'ssl'  => PHPMailer::ENCRYPTION_SMTPS,
+        'none' => '',
+    ];
+    $mail->SMTPSecure = $secure[$config['smtp']['secure']] ?? PHPMailer::ENCRYPTION_STARTTLS;
     $mail->SMTPAutoTLS = $config['smtp']['secure'] !== 'none';
     $mail->SMTPAuth   = $config['smtp']['user'] !== '';
     $mail->Username   = $config['smtp']['user'];
     $mail->Password   = $config['smtp']['password'];
     $mail->CharSet    = PHPMailer::CHARSET_UTF8;
+    $mail->Timeout    = 20;
+    if (!empty($config['debug'])) {
+        // SMTP-Dialog ins PHP-Fehlerlog schreiben (ohne Passwort im Klartext)
+        $mail->SMTPDebug   = 2;
+        $mail->Debugoutput = 'error_log';
+    }
     $mail->setFrom($config['from_email'], $config['from_name']);
     return $mail;
 }
@@ -137,8 +160,8 @@ try {
         . "--\nDer Absender hat der Verarbeitung seiner Angaben zur Bearbeitung der Anfrage zugestimmt.\n";
     $mail->send();
 } catch (MailException $e) {
-    error_log('Schadensformular: Versand ans Büro fehlgeschlagen: ' . $e->getMessage());
-    antworten(false, 'Die Meldung konnte nicht gesendet werden. Bitte rufen Sie uns an: 06103 / 22011.');
+    antworten(false, 'Die Meldung konnte nicht gesendet werden. Bitte rufen Sie uns an: 06103 / 22011.', false,
+        'Versand ans Büro fehlgeschlagen: ' . $e->getMessage());
 }
 
 $zeiten[] = time();

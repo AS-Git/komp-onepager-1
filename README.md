@@ -25,12 +25,20 @@ vendor/              PHPMailer (per Composer, nicht im Repository)
 
 ## Einrichten
 
-1. `composer install --no-dev` (PHP ≥ 8.1)
+1. `composer install --no-dev` (PHP ≥ 7.4)
 2. `cp config/config.example.php config/config.php` und SMTP-Daten, Absender und Empfänger eintragen
 3. Alles hochladen und den Document Root der Domain auf `public/` setzen
 
-Kann der Document Root nicht geändert werden, den Inhalt von `public/` in den Webroot legen,
-`config/` und `vendor/` eine Ebene darüber, und die Pfade in `senden.php` prüfen.
+Kann der Document Root nicht geändert werden, den Inhalt von `public/` in den Webroot legen und
+`config/` und `vendor/` eine Ebene darüber. Geht auch das nicht, dürfen beide Ordner direkt neben
+`senden.php` liegen; `senden.php` findet sie dort ebenfalls.
+
+## Fehlersuche Formular
+
+Meldet das Formular „Die Meldung konnte nicht gesendet werden“, in `config/config.php`
+`'debug' => true` setzen und erneut senden: Das Formular zeigt dann den Grund an
+(z. B. falsches SMTP-Passwort, falscher Port, Absender nicht erlaubt), und der SMTP-Dialog
+landet im PHP-Fehlerlog des Hostings. Danach wieder auf `false` stellen.
 
 ## Lokal testen
 

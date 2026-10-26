@@ -24,6 +24,10 @@ return [
     // Eingangsbestätigung an den Absender, wenn er eine E-Mail-Adresse angibt
     'confirmation' => true,
 
+    // Diagnose: true zeigt den Fehlergrund im Formular an und schreibt den SMTP-Dialog ins PHP-Fehlerlog.
+    // Nur zur Einrichtung einschalten, danach wieder auf false.
+    'debug' => false,
+
     // Spamschutz: höchstens so viele Meldungen pro IP-Adresse und Stunde
     'rate_limit_per_hour' => 5,
 ];

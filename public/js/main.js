@@ -71,7 +71,12 @@
       body: new FormData(form),
       headers: { 'Accept': 'application/json' }
     })
-      .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
+      .then(function (res) {
+        return res.json().catch(function () {
+          // Keine JSON-Antwort: meist ein PHP-Fehler auf dem Server (z. B. zu alte PHP-Version)
+          return { ok: false, fehler: 'Bitte versuchen Sie es erneut oder rufen Sie uns an: 06103 / 22011. (Serverfehler HTTP ' + res.status + ')' };
+        });
+      })
       .then(function (data) {
         if (data.ok) {
           form.reset();
