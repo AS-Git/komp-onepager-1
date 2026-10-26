@@ -27,6 +27,8 @@ body { margin: 0; }
 .op-trustbar .k-container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap; }
 .op-trust-claim { font-family: var(--font-display); font-size: 20px; line-height: 24px; font-weight: 600; color: var(--komp-navy); display: flex; align-items: center; gap: var(--space-2); }
 .op-trust-claim .k-icon { color: var(--komp-red); }
+.op-trust-logos { gap: var(--space-5); }
+.op-trust-logos img { display: block; height: 56px; width: auto; }
 
 /* Leistungen */
 .op-feature { grid-column: 1 / -1; background: var(--komp-navy); color: var(--on-dark); border-radius: var(--radius-md); padding: var(--space-6) var(--space-7); display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-6); align-items: center; }
@@ -130,6 +132,8 @@ body { margin: 0; }
   .op-aid { padding: var(--space-5); }
   .op-aid-foot { grid-template-columns: minmax(0, 1fr); }
   .op-trustbar .k-container { justify-content: flex-start; }
+  .op-trust-logos { gap: var(--space-4); }
+  .op-trust-logos img { height: 44px; }
   .op-about, .op-rights, .op-faq-grid { gap: var(--space-7); }
   .op-footer-cta .k-actions, .op-footer-cta .k-btn { width: 100%; }
   .op-callbar { display: block; position: sticky; bottom: 0; z-index: 20; }
