@@ -1,0 +1,10 @@
+{
+    "name": "as-git/komp-onepager",
+    "description": "OnePager KFZ-Ingenieur-Büro Komp",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
