@@ -69,7 +69,7 @@ $nichtErreichbar = 'Das Formular ist gerade nicht erreichbar. Bitte rufen Sie un
 $basis = is_dir(__DIR__ . '/../config') || is_dir(__DIR__ . '/../vendor') ? __DIR__ . '/..' : __DIR__;
 $configFile = $basis . '/config/config.php';
 if (!is_file($configFile)) {
-    $debug = true; // ohne Config gibt es nichts Geheimes zu verraten
+    // Ursache nur ins Fehlerlog: Serverpfade gehen Besucher nichts an
     antworten(false, $nichtErreichbar, false, 'config.php fehlt (erwartet unter ' . realpath($basis) . '/config/config.php)');
 }
 $config = require $configFile;
@@ -81,6 +81,13 @@ if (!is_file($autoload)) {
 }
 require $autoload;
 
+// Nur Formulare von der eigenen Website annehmen: Schickt der Browser einen Origin mit,
+// muss er zum eigenen Host passen (verhindert das Abschicken von fremden Seiten aus).
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if ($origin !== '' && parse_url($origin, PHP_URL_HOST) !== parse_url('//' . ($_SERVER['HTTP_HOST'] ?? ''), PHP_URL_HOST)) {
+    antworten(false, $nichtErreichbar, false, 'fremder Origin abgewiesen: ' . substr($origin, 0, 100));
+}
+
 // Spamschutz: Honeypot gefüllt oder in unter 3 Sekunden ausgefüllt -> still verwerfen.
 // t = Ausfülldauer in ms, von js/main.js gesetzt; ohne JavaScript leer.
 $t = feld('t', 12);
@@ -88,13 +95,31 @@ if (feld('website', 200) !== '' || ($t !== '' && (int) $t < 3000)) {
     antworten(true);
 }
 
-// Spamschutz: Meldungen pro IP und Stunde begrenzen (IP nur als Hash, Datei verfällt nach einer Stunde)
+/**
+ * Zähler für die Spambremse: eine Datei pro Schlüssel im Temp-Verzeichnis, nur Zeitstempel,
+ * Schlüssel nur als Hash (keine IP- oder E-Mail-Adresse im Klartext), Einträge verfallen nach einer Stunde.
+ */
+function zaehlerDatei(string $schluessel): string
+{
+    return sys_get_temp_dir() . '/komp-formular-' . hash('sha256', $schluessel . __DIR__);
+}
+function zaehlerLesen(string $datei): array
+{
+    return is_file($datei) ? array_values(array_filter(
+        array_map('intval', explode(',', (string) file_get_contents($datei))),
+        fn (int $z) => $z > time() - 3600
+    )) : [];
+}
+function zaehlerErhoehen(string $datei, array $zeiten): void
+{
+    $zeiten[] = time();
+    @file_put_contents($datei, implode(',', $zeiten), LOCK_EX);
+}
+
+// Spamschutz: Meldungen pro IP und Stunde begrenzen
 $limit = (int) ($config['rate_limit_per_hour'] ?? 5);
-$ipFile = sys_get_temp_dir() . '/komp-formular-' . hash('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . __DIR__);
-$zeiten = is_file($ipFile) ? array_filter(
-    array_map('intval', explode(',', (string) file_get_contents($ipFile))),
-    fn (int $z) => $z > time() - 3600
-) : [];
+$ipFile = zaehlerDatei('ip:' . ($_SERVER['REMOTE_ADDR'] ?? ''));
+$zeiten = zaehlerLesen($ipFile);
 if (count($zeiten) >= $limit) {
     antworten(false, 'Sie haben in kurzer Zeit mehrere Meldungen gesendet. Bitte rufen Sie uns an: 06103 / 22011.');
 }
@@ -124,6 +149,18 @@ if ($email !== '' && !PHPMailer::validateAddress($email)) {
 if ($datum !== '') {
     $d = DateTimeImmutable::createFromFormat('!Y-m-d', $datum);
     $datum = $d ? $d->format('d.m.Y') : '';
+}
+
+// Spamschutz: Link-Spam still verwerfen. Echte Schadensmeldungen enthalten in Name, Telefon,
+// Fahrzeug und Kennzeichen nie Links und im Freitext höchstens einen.
+$linkMuster = '~(https?://|www\.|\[url|<a\s)~i';
+foreach ([$name, $telefon, $fahrzeug, $kennzeichen] as $wert) {
+    if (preg_match($linkMuster, $wert)) {
+        antworten(true);
+    }
+}
+if (preg_match_all($linkMuster, $nachricht) > 1) {
+    antworten(true);
 }
 
 function mailer(array $config): PHPMailer
@@ -180,13 +217,22 @@ try {
         'Versand ans Büro fehlgeschlagen: ' . $e->getMessage());
 }
 
-$zeiten[] = time();
-@file_put_contents($ipFile, implode(',', $zeiten), LOCK_EX);
+zaehlerErhoehen($ipFile, $zeiten);
 
 // 2. Eingangsbestätigung an den Absender. Bewusst ohne Formularinhalte,
 // damit das Formular nicht missbraucht werden kann, um fremden Text an beliebige Adressen zu schicken.
+// Zusätzlich gedrosselt, damit niemand fremde Postfächer mit Bestätigungen fluten kann:
+// höchstens eine pro Empfänger und Stunde und insgesamt höchstens 'confirmation_limit_per_hour'.
+$empfaengerFile = zaehlerDatei('mail:' . strtolower($email));
+$empfaengerZeiten = $email !== '' ? zaehlerLesen($empfaengerFile) : [];
+$gesamtFile = zaehlerDatei('bestaetigungen');
+$gesamtZeiten = zaehlerLesen($gesamtFile);
 $bestaetigt = false;
-if ($email !== '' && !empty($config['confirmation'])) {
+if ($email !== '' && !empty($config['confirmation'])
+    && count($empfaengerZeiten) < 1
+    && count($gesamtZeiten) < (int) ($config['confirmation_limit_per_hour'] ?? 20)) {
+    zaehlerErhoehen($empfaengerFile, $empfaengerZeiten);
+    zaehlerErhoehen($gesamtFile, $gesamtZeiten);
     try {
         $mail = mailer($config);
         $mail->addAddress($email);
