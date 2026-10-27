@@ -30,4 +30,8 @@ return [
 
     // Spamschutz: höchstens so viele Meldungen pro IP-Adresse und Stunde
     'rate_limit_per_hour' => 5,
+
+    // Schutz vor Missbrauch der Eingangsbestätigung: höchstens so viele Bestätigungen pro Stunde
+    // insgesamt (zusätzlich gilt: höchstens eine pro Empfängeradresse und Stunde)
+    'confirmation_limit_per_hour' => 20,
 ];
