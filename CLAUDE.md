@@ -12,28 +12,29 @@ Sprache mit dem Auftraggeber: Deutsch.
 - Klassen: `k-*` = Designsystem (`public/css/komp.css`, nicht seitenspezifisch ändern), `op-*` = Seite (`public/css/onepager.css`).
 - Schriften (Barlow, Barlow Condensed, Material Symbols, Icon-Subset) liegen lokal in `public/fonts/`; neue Icons müssen ins Subset (`public/css/fonts.css`, woff2 neu erzeugen).
 
-## Versionen (alle drei parallel behalten, nichts verwerfen)
+## Versionen
 
 | Branch | Inhalt |
 |---|---|
-| `main` | Version 1: Umsetzung des ursprünglichen Designs |
-| `design-audit` | Version 2: Barrierefreiheit (WCAG 2.2 AA), Leistungen als nummerierte Liste, weniger Kartenraster |
-| `design-v3` | Version 3, aktuell bevorzugt: Hero in Komp-Dunkelblau mit Konstruktionsraster, große Überschrift und Telefonnummer |
+| `design-v3` | **Einzige weiterverfolgte Version** (Festlegung des Auftraggebers): Hero in Komp-Dunkelblau mit Konstruktionsraster, große Überschrift und Telefonnummer |
+| `main` | Version 1: Umsetzung des ursprünglichen Designs, nur noch Archiv |
+| `design-audit` | Version 2: Barrierefreiheit (WCAG 2.2 AA), Leistungen als nummerierte Liste, nur noch Archiv |
 
-Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Sachliche Korrekturen und Sicherheits-Fixes immer in **alle drei** Branches übernehmen.
+Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v3`; `main` und `design-audit` bleiben unverändert erhalten.
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
 
 - **Dieter Komp ist verstorben.** Nie als aktiv tätig nennen. Heute leitet **Dipl.-Ing. Dietmar Komp** das Büro. In der Firmengeschichte bleibt „1977: Dieter Komp wird Partner … prägt das Büro über Jahrzehnte“.
 - **„Seit den 1950er Jahren“ nicht im Hero** (wirkt altbacken). In der Firmengeschichte ist es in Ordnung.
 - Hero-Kicker: „Unabhängige KFZ-Sachverständige im Rhein-Main-Gebiet“.
+- Einsatzgebiet: Langen, Egelsbach, Dreieich, Offenthal, Neu-Isenburg, Rödermark, Mörfelden-Walldorf, Darmstadt, Frankfurt am Main (Chips, Footer, JSON-LD `areaServed`).
 - Logos in der Vertrauensleiste: BVSK, ADAC Vertragssachverständiger, GTÜ Vertragspartner (`public/img/*.webp`); IHK nur als Textsiegel.
 - Keine Stockfotos von Unfallautos; keine Optik von Unfall-Portalen, Behörden, Baukasten-Templates oder Autohaus-Werbung (siehe `PRODUCT.md`).
 
 ## Offene Punkte
 
 - Meta-Description enthält noch „seit den 1950er Jahren“. Ob ersetzen: Entscheidung des Auftraggebers offen. Vorschlag: „Unabhängige KFZ-Gutachter in Langen (Hessen): Unfallgutachten, Wertermittlung, Leasingrückgabe, HU. Persönlich in zweiter Generation. Tel. 06103 / 22011“.
-- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[FOTO]` (Porträt Dietmar Komp), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), `[IMPRESSUM]`, `[DATENSCHUTZ]` (Rechtstexte fehlen noch; ohne sie nicht live schalten).
+- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[FOTO]` (Porträt Dietmar Komp), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Vor dem Livegang prüfen: Hoster weiterhin Mittwald? Wird „IHK öffentlich bestellt und vereidigt“ auf der Seite genannt, braucht das Impressum die Bestellungskörperschaft und das Sachgebiet.
 - Echte Fotos (Büro, Besichtigung, Dietmar Komp) wären der nächste große Gestaltungsschritt.
 - Formular auf dem Live-Server: Beim ersten Test kam „Die Meldung konnte nicht gesendet werden“. Die Ursache ist nicht geklärt. Zur Diagnose `'debug' => true` in `config/config.php` setzen, die Meldung `[Diagnose: …]` auswerten und danach wieder auf `false`.
 - `.htaccess` (HTTPS-Umleitung, HSTS, Content-Security-Policy, Zugriffssperren) ist nicht auf einem echten Apache getestet. Nach dem Upload prüfen: Seite lädt, http→https, Karte öffnet sich nach Klick. Bei „500 Internal Server Error“ das Fehlerlog ansehen.

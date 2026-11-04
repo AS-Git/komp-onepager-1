@@ -8,7 +8,7 @@ brand
 
 Zwei gleichwertige Gruppen:
 
-- **Privatleute nach einem Unfall** im Rhein-Main-Gebiet (Langen, Dreieich, Egelsbach, Neu-Isenburg, Darmstadt, Frankfurt). Oft kurz nach dem Schreck, häufig am Handy, teils älter. Sie wollen wissen, was ihnen zusteht, und schnell jemanden erreichen: anrufen oder den Schaden online melden.
+- **Privatleute nach einem Unfall** im Rhein-Main-Gebiet (Langen, Egelsbach, Dreieich, Offenthal, Neu-Isenburg, Rödermark, Mörfelden-Walldorf, Darmstadt, Frankfurt). Oft kurz nach dem Schreck, häufig am Handy, teils älter. Sie wollen wissen, was ihnen zusteht, und schnell jemanden erreichen: anrufen oder den Schaden online melden.
 - **Fachpublikum**: Anwälte, Werkstätten, Gerichte und Versicherungsnahe, die einen unabhängigen, gerichtsfesten Sachverständigen suchen und Seriosität prüfen (Bestellung, Verbände, Erfahrung).
 
 Dazu planbare Anliegen: HU-Termin als GTÜ-Partner, Wertgutachten, Oldtimer, Leasingrückgabe.
