@@ -10,6 +10,28 @@
     onScroll();
   }
 
+  // Mobiles Menü: auf-/zuklappen, schließt bei Linkklick, Escape, Klick daneben und auf breiten Bildschirmen
+  var toggle = document.querySelector('.op-menu-toggle');
+  var menu = document.getElementById('op-menu');
+  if (toggle && menu) {
+    var label = toggle.querySelector('.op-menu-label');
+    var setMenu = function (open, focusToggle) {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      if (label) label.textContent = open ? 'Menü schließen' : 'Menü öffnen';
+      if (!open && focusToggle) toggle.focus();
+    };
+    toggle.addEventListener('click', function () { setMenu(menu.hidden); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) setMenu(false, true);
+    });
+    document.addEventListener('click', function (e) {
+      if (!menu.hidden && !menu.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+  }
+
   // Karte erst nach Klick laden (DSGVO)
   var map = document.querySelector('.op-map[data-map-src]');
   var mapLink = map && map.querySelector('[data-map-load]');
