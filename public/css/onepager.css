@@ -386,6 +386,37 @@ body { margin: 0; }
 .k-footer .op-footer-h, .k-footer h4 { text-transform: none; letter-spacing: 0; font-size: 20px; }
 .op-footer-cta strong { letter-spacing: -0.02em; font-weight: 700; }
 
+/* ---------- Feinschliff ---------- */
+.k-root { -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+/* Ziffern gleich breit: Telefonnummern, Jahreszahlen, Nummern stehen ruhig untereinander */
+.op-bigphone-no, .k-phone strong, .k-topbar a, .op-contact a[href^="tel"], .op-menu-actions .k-btn, .op-year, .k-step-no { font-variant-numeric: tabular-nums; }
+/* Umbruch: ausgewogene Überschriften, keine Einzelwörter am Absatzende */
+.op-stage-title, .op-aid-head h2, .op-service h3, .op-feature h3, .op-fact h3, .op-contact h3, .op-footer-cta strong, .k-faq summary, .k-step h3 { text-wrap: balance; }
+.op-stage-lead, .op-aid-list li, .op-feature p, .op-fact p, .op-timeline p, .k-step p, .op-area p { text-wrap: pretty; }
+/* Tastendruck spürbar, ohne zu hüpfen */
+.k-btn { transition: background-color .15s, border-color .15s, color .15s, transform .12s cubic-bezier(.25, 1, .5, 1); }
+.k-btn:active { transform: scale(0.97); }
+.op-menu-toggle { transition: border-color .15s, transform .12s cubic-bezier(.25, 1, .5, 1); }
+.op-menu-toggle:active { transform: scale(0.94); }
+.op-menu-bars::before, .op-menu-bars::after, .op-menu-bars span { transition-timing-function: cubic-bezier(.25, 1, .5, 1); }
+/* Menü erscheint weich statt schlagartig */
+@keyframes op-menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.op-menu:not([hidden]) { animation: op-menu-in .18s cubic-bezier(.25, 1, .5, 1); }
+/* FAQ: Antwort blendet ruhig ein */
+@keyframes op-fade-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.k-faq details[open] > div { animation: op-fade-in .22s cubic-bezier(.25, 1, .5, 1); }
+.k-faq summary::after { transition: color .15s, border-color .15s; }
+/* Logos: einheitliche Kante auf weißem Grund */
+.op-trust-logos img { outline: 1px solid oklch(30% 0.03 258 / 0.06); outline-offset: -1px; }
+/* Links: Unterstreichung erscheint beim Zeigen */
+.k-footer a { text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.op-menu-contact a, .op-contact a { text-underline-offset: 4px; }
+.op-contact a:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) {
+  .k-btn:active, .op-menu-toggle:active { transform: none; }
+  .op-menu:not([hidden]), .k-faq details[open] > div { animation: none; }
+}
+
 @media (max-width: 1024px) {
   .op-services-head { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
   .op-drawing { max-width: 560px; }
