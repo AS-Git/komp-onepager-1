@@ -9,8 +9,8 @@ public/              Webroot (Document Root des Hostings hierauf zeigen lassen)
   index.html         OnePager
   danke.html         Erfolgsseite (Formular ohne JavaScript)
   fehler.html        Fehlerseite (Formular ohne JavaScript)
-  impressum.html     Platzhalter – Texte einsetzen
-  datenschutz.html   Platzhalter – Texte einsetzen
+  impressum.html     Impressum
+  datenschutz.html   Datenschutzerklärung (passend zu dieser Seite: keine Cookies, Karte nach Klick)
   senden.php         Formularversand (PHPMailer, SMTP)
   css/komp.css       Designsystem: Tokens + Komponenten (k-*)
   css/onepager.css   Seitenspezifische Styles (op-*)
@@ -62,4 +62,3 @@ Im Code mit `[…]` markiert:
 - `[DOMAIN]` Canonical und JSON-LD-URL in `index.html`
 - `[FOTO]` Porträt Dietmar Komp
 - `[BEWERTUNGEN]`, `[GOOGLE-PROFIL]` echte Google-Bewertungen und Link zum Unternehmensprofil
-- `[IMPRESSUM]`, `[DATENSCHUTZ]` Rechtstexte
