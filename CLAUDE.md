@@ -6,8 +6,11 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 ## Arbeitsweise
 
-- Lokale Arbeitskopie beim Auftraggeber: `C:\Temp\Komp` (Repository direkt in diesem Ordner, Branch `design-v4`). Änderungen dort vornehmen.
-- Jede abgeschlossene Änderung ohne Rückfrage auf `design-v4` committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
+- Lokale Arbeitskopien beim Auftraggeber, getrennt nebeneinander:
+  - `C:\Temp\Komp\version-4` = Branch `design-v4` (Arbeitsversion)
+  - `C:\Temp\Komp\version-3` = Branch `design-v3` (eingefroren; nur auf ausdrücklichen Wunsch ändern, dann nur dort)
+  Änderungen im Ordner der jeweiligen Version vornehmen, nie zwischen den Versionen mischen.
+- Jede abgeschlossene Änderung ohne Rückfrage auf den Branch der jeweiligen Version committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
 
 ## Technik
 
