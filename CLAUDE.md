@@ -45,7 +45,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 - Echte Fotos (Büro, Besichtigung, Dietmar Komp) wären der nächste große Gestaltungsschritt.
 - Formular auf dem Live-Server: Beim ersten Test kam „Die Meldung konnte nicht gesendet werden“. Die Ursache ist nicht geklärt. Zur Diagnose `'debug' => true` in `config/config.php` setzen, die Meldung `[Diagnose: …]` auswerten und danach wieder auf `false`.
 - `.htaccess` (HTTPS-Umleitung, HSTS, Content-Security-Policy, Zugriffssperren) ist nicht auf einem echten Apache getestet. Nach dem Upload prüfen: Seite lädt, http→https, Karte öffnet sich nach Klick. Bei „500 Internal Server Error“ das Fehlerlog ansehen.
-- GitHub: Default-Branch auf `main` stellen; Hilfs-Branch `claude/quirky-goodall-nc14bh` kann danach weg.
+- Formular auf dem Testserver: Eine vorgeschaltete Firewall („Anders und Seim stopped this request“) blockiert `senden.php` mit HTTP 403. Ausnahme für `POST /senden.php` einrichten.
 
 ## Spam- und Sicherheitsschutz (nicht abschwächen)
 
