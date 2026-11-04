@@ -24,6 +24,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
 
+- **Öffentlich bestellt und vereidigt ist nur Dipl.-Ing. Werner Thiel** (IHK Offenbach am Main, Kraftfahrzeugschäden und -bewertung), nicht Dietmar Komp. Formulierungen wie „IHK-Sachverständiger“ (Hero) oder „bestellter Sachverständiger im Team“ (Siegel), nie so, dass Herr Komp oder das ganze Büro bestellt wirkt. Angaben zur Bestellung stehen im Impressum.
 - **Dieter Komp ist verstorben.** Nie als aktiv tätig nennen. Heute leitet **Dipl.-Ing. Dietmar Komp** das Büro. In der Firmengeschichte bleibt „1977: Dieter Komp wird Partner … prägt das Büro über Jahrzehnte“.
 - **„Seit den 1950er Jahren“ nicht im Hero** (wirkt altbacken). In der Firmengeschichte ist es in Ordnung.
 - Hero-Kicker: „Unabhängige KFZ-Sachverständige im Rhein-Main-Gebiet“.
@@ -34,7 +35,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 ## Offene Punkte
 
 - Meta-Description enthält noch „seit den 1950er Jahren“. Ob ersetzen: Entscheidung des Auftraggebers offen. Vorschlag: „Unabhängige KFZ-Gutachter in Langen (Hessen): Unfallgutachten, Wertermittlung, Leasingrückgabe, HU. Persönlich in zweiter Generation. Tel. 06103 / 22011“.
-- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[FOTO]` (Porträt Dietmar Komp), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Vor dem Livegang prüfen: Hoster weiterhin Mittwald? Wird „IHK öffentlich bestellt und vereidigt“ auf der Seite genannt, braucht das Impressum die Bestellungskörperschaft und das Sachgebiet.
+- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[FOTO]` (Porträt Dietmar Komp), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum vor dem Livegang einmal gegenprüfen.
 - Echte Fotos (Büro, Besichtigung, Dietmar Komp) wären der nächste große Gestaltungsschritt.
 - Formular auf dem Live-Server: Beim ersten Test kam „Die Meldung konnte nicht gesendet werden“. Die Ursache ist nicht geklärt. Zur Diagnose `'debug' => true` in `config/config.php` setzen, die Meldung `[Diagnose: …]` auswerten und danach wieder auf `false`.
 - `.htaccess` (HTTPS-Umleitung, HSTS, Content-Security-Policy, Zugriffssperren) ist nicht auf einem echten Apache getestet. Nach dem Upload prüfen: Seite lädt, http→https, Karte öffnet sich nach Klick. Bei „500 Internal Server Error“ das Fehlerlog ansehen.
