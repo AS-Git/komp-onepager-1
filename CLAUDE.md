@@ -6,7 +6,7 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 ## Arbeitsweise
 
-- Lokale Arbeitskopie beim Auftraggeber: `C:\Temp\Komp\komp-onepager-1` (Branch `design-v4`). Änderungen dort vornehmen.
+- Lokale Arbeitskopie beim Auftraggeber: `C:\Temp\Komp` (Repository direkt in diesem Ordner) (Branch `design-v4`). Änderungen dort vornehmen.
 - Jede abgeschlossene Änderung ohne Rückfrage auf `design-v4` committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
 
 ## Technik
