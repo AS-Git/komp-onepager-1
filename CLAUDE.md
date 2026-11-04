@@ -26,6 +26,8 @@ Sprache mit dem Auftraggeber: Deutsch.
 | `main` | Version 1: Umsetzung des ursprünglichen Designs, nur noch Archiv |
 | `design-audit` | Version 2: Barrierefreiheit (WCAG 2.2 AA), Leistungen als nummerierte Liste, nur noch Archiv |
 
+**Abnahme:** `design-v3` (Stand `a225b10`) und `design-v4` (Stand `51c2b19`, danach nur `CLAUDE.md` geändert) liegen beim Kunden zur Abnahme. Bis zur Rückmeldung an der Website nichts ändern, nur auf ausdrücklichen Wunsch des Auftraggebers.
+
 Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v4`; `design-v3`, `main` und `design-audit` bleiben unverändert erhalten.
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
