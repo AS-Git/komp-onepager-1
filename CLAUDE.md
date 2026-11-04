@@ -6,8 +6,8 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 ## Arbeitsweise
 
-- Lokale Arbeitskopie beim Auftraggeber: `C:\Temp\Komp\komp-onepager-1` (Branch `design-v3`). Änderungen dort vornehmen.
-- Jede abgeschlossene Änderung ohne Rückfrage auf `design-v3` committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
+- Lokale Arbeitskopie beim Auftraggeber: `C:\Temp\Komp\komp-onepager-1` (Branch `design-v4`). Änderungen dort vornehmen.
+- Jede abgeschlossene Änderung ohne Rückfrage auf `design-v4` committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
 
 ## Technik
 
@@ -21,11 +21,12 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 | Branch | Inhalt |
 |---|---|
-| `design-v3` | **Einzige weiterverfolgte Version** (Festlegung des Auftraggebers): Hero in Komp-Dunkelblau mit Konstruktionsraster, große Überschrift und Telefonnummer |
+| `design-v4` | **Arbeitsversion**: gleiche Inhalte wie `design-v3`, Gestaltung „Ingenieur-Zeichnung“ (Haarlinien statt Karten, präzise Ecken, Maßlinien, technische Fahrzeugzeichnung). Gestaltungsebene am Ende von `public/css/onepager.css` |
+| `design-v3` | **Eingefroren, 1:1 erhalten**: diesen Stand hat der Kunde gesehen. Nicht mehr ändern. Hero in Komp-Dunkelblau mit Konstruktionsraster |
 | `main` | Version 1: Umsetzung des ursprünglichen Designs, nur noch Archiv |
 | `design-audit` | Version 2: Barrierefreiheit (WCAG 2.2 AA), Leistungen als nummerierte Liste, nur noch Archiv |
 
-Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v3`; `main` und `design-audit` bleiben unverändert erhalten.
+Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v4`; `design-v3`, `main` und `design-audit` bleiben unverändert erhalten.
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
 
@@ -35,6 +36,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 - Hero-Kicker: „Unabhängige KFZ-Sachverständige im Rhein-Main-Gebiet“.
 - Einsatzgebiet: Langen, Egelsbach, Dreieich, Offenthal, Neu-Isenburg, Rödermark, Mörfelden-Walldorf, Darmstadt, Frankfurt am Main (Chips, Footer, JSON-LD `areaServed`).
 - Logos in der Vertrauensleiste: BVSK, ADAC Vertragssachverständiger, GTÜ Vertragspartner (`public/img/*.webp`); IHK nur als Textsiegel.
+- Inhalte (Texte, Reihenfolge der Abschnitte) in `design-v4` identisch zu `design-v3` halten, solange der Auftraggeber nichts anderes sagt.
 - Keine Stockfotos von Unfallautos; keine Optik von Unfall-Portalen, Behörden, Baukasten-Templates oder Autohaus-Werbung (siehe `PRODUCT.md`).
 
 ## Offene Punkte

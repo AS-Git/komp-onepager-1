@@ -252,3 +252,151 @@ body { margin: 0; }
   .op-page { padding: var(--space-8) 0; }
   .op-page .k-h1 { font-size: 38px; line-height: 42px; overflow-wrap: break-word; }
 }
+
+/* ==========================================================================
+   Version 4: Gestaltung „Ingenieur-Zeichnung“
+   Haarlinien statt Karten, präzise Ecken, Maßlinien als Ordnungselement.
+   Inhalte und Reihenfolge unverändert; Überschreibungen nur in dieser Ebene.
+   ========================================================================== */
+:root {
+  --radius-sm: 3px; --radius-md: 3px; --radius-lg: 4px;
+  --ink: oklch(27% 0.025 258); --ink-muted: oklch(45% 0.025 258);
+  --line: oklch(89% 0.012 258); --line-strong: oklch(58% 0.03 258);
+  --surface-tint: oklch(97.4% 0.007 258); --surface-mist: oklch(94.2% 0.012 258);
+  --shadow-card: none;
+  --shadow-raised: 0 1px 0 oklch(85% 0.015 258), 0 18px 36px -22px oklch(30% 0.08 258 / 0.45);
+  --rule-sky: rgba(187, 230, 255, 0.28);
+}
+.k-root { font-feature-settings: "kern", "tnum" 0; }
+.k-root a:not(.k-btn) { text-decoration-thickness: 1px; }
+
+/* Rhythmus: Abschnitte unterschiedlich weit, nicht alle gleich gepolstert */
+.k-section { padding: clamp(64px, 4rem + 4vw, 128px) 0; }
+#ihre-rechte, #schaden-melden { padding: clamp(56px, 3rem + 3vw, 104px) 0; }
+
+/* Kicker: Satzschrift statt gesperrter Versalien, kurze Maßlinie statt Dreieck */
+.k-eyebrow { text-transform: none; letter-spacing: 0.01em; font-size: 18px; line-height: 22px; gap: var(--space-3); }
+.k-eyebrow::before { width: 28px; height: 0; border: 0; border-top: 2px solid currentColor; }
+.op-stage .k-eyebrow { font-size: 17px; }
+
+/* Überschriften: engere Laufweite, klarere Abstufung */
+.k-h2 { letter-spacing: -0.012em; font-weight: 600; text-wrap: balance; }
+.k-section-head { margin-bottom: clamp(40px, 2rem + 2vw, 72px); }
+
+/* ---------- Hero ---------- */
+.op-stage { padding: clamp(40px, 1.5rem + 2vw, 72px) 0; }
+.op-stage-title { letter-spacing: -0.03em; }
+.op-stage-facts { gap: var(--space-3) var(--space-7); margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--rule-sky); }
+.op-stage-facts .k-icon { font-size: 20px; }
+
+/* Soforthilfe als Merkblatt: Blatt mit Kopfzeile, Nummern auf Haarlinien */
+.op-aid { border: 0; border-radius: var(--radius-sm); box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.55); padding: 0; gap: 0; overflow: hidden; }
+.op-aid-head { padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--line); gap: var(--space-4); }
+.op-aid-badge { width: 44px; height: 44px; border-radius: var(--radius-sm); }
+.op-aid-head h2 { font-size: 30px; line-height: 32px; letter-spacing: -0.01em; }
+.op-aid-list { gap: 0; padding: var(--space-1) var(--space-6) var(--space-3); }
+.op-aid-list li { grid-template-columns: 40px 1fr; padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
+.op-aid-list li:last-child { border-bottom: 0; }
+.op-aid-list li::before { content: counter(aid, decimal-leading-zero); width: auto; height: auto; border-radius: 0; background: none; color: var(--komp-red); font-size: 22px; line-height: 24px; font-variant-numeric: tabular-nums; display: block; }
+
+/* ---------- Vertrauensleiste ---------- */
+.k-seal { border-radius: var(--radius-sm); padding-right: var(--space-3); }
+.k-seal b { border-radius: 2px; }
+.op-trust-claim .k-icon { display: none; }
+
+/* ---------- Leistungen ---------- */
+.op-services-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: var(--space-7); align-items: end; margin-bottom: clamp(40px, 2rem + 2vw, 72px); }
+.op-services-head .k-section-head { margin-bottom: 0; }
+.op-drawing { margin: 0; color: var(--komp-navy); }
+.op-drawing svg { display: block; width: 100%; height: auto; overflow: visible; }
+.op-drawing g { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.op-drawing path, .op-drawing circle { vector-effect: non-scaling-stroke; }
+.op-drawing-axes { stroke: var(--line-strong) !important; stroke-dasharray: 10 4 2 4; opacity: .55; }
+.op-drawing-dim { stroke: var(--ink-muted) !important; stroke-width: 1 !important; }
+.op-drawing-dim path:nth-of-type(2), .op-drawing-dim path:nth-of-type(4) { fill: var(--ink-muted); stroke: none; }
+.op-drawing text { font-family: var(--font-display); font-size: 15px; font-weight: 600; letter-spacing: 0.04em; fill: var(--ink-muted); stroke: none; }
+.op-drawing-mark { stroke: var(--komp-red) !important; stroke-dasharray: 4 4; }
+.op-drawing-mark path { stroke-dasharray: none; }
+.op-drawing-mark text { fill: var(--komp-red); }
+.op-services { column-gap: clamp(32px, 2rem + 2vw, 80px); }
+.op-service { padding: var(--space-6) 0 var(--space-7); border-top-color: var(--line-strong); }
+.op-service::before { font-size: 18px; line-height: 34px; font-weight: 600; letter-spacing: 0.02em; }
+.op-service h3 { font-size: clamp(26px, 1.3rem + 0.7vw, 32px); line-height: 1.1; letter-spacing: -0.01em; }
+
+/* HU: amtliche Leistung als Prüfvermerk, ohne Symbolkachel */
+.op-feature { border-radius: var(--radius-sm); grid-template-columns: minmax(0, 1fr) auto; padding: var(--space-7); background-color: var(--komp-navy);
+  background-image: linear-gradient(var(--rule-sky), var(--rule-sky)); background-size: 1px 100%; background-repeat: no-repeat; background-position: calc(100% - 300px) 0; }
+.op-feature .k-card-icon { display: none; }
+.op-feature h3 { font-size: clamp(26px, 1.3rem + 0.8vw, 34px); line-height: 1.1; }
+.op-feature .op-tag { text-transform: none; letter-spacing: 0.01em; font-size: 16px; }
+.op-feature p { margin-top: var(--space-2); }
+
+/* Fahrzeugarten und Orte: Aufzählung statt Kästchen */
+.op-vehicles { gap: var(--space-2) var(--space-4); padding-top: var(--space-5); border-top: 1px solid var(--line); }
+.op-chips { gap: 0; margin-left: -28px; clip-path: inset(0 0 0 28px); }
+.op-chip { position: relative; padding: 0 0 0 28px; border: 0; background: none; border-radius: 0; font-family: var(--font-display); font-size: 20px; line-height: 30px; font-weight: 600; color: var(--komp-navy); }
+.op-chip::before { content: "/"; position: absolute; left: 9px; color: var(--line-strong); font-weight: 400; }
+
+/* ---------- Über uns ---------- */
+.k-photo { border-radius: var(--radius-sm); }
+.op-timeline { gap: var(--space-7); }
+.op-timeline::before { left: 0; top: 0; bottom: 0; border-left: 1px solid var(--line-strong); }
+.op-timeline li { padding-left: var(--space-7); }
+.op-timeline li::before { left: 0; top: 24px; width: 24px; height: 0; border: 0; border-top: 2px solid var(--komp-red); border-radius: 0; background: none; }
+.op-year { font-size: clamp(44px, 2rem + 1.6vw, 60px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.op-timeline h3 { margin-top: var(--space-2); }
+.op-quote { background: none; border-radius: 0; padding: var(--space-6) 0 0 var(--space-7); margin-top: var(--space-7); font-size: clamp(26px, 1.3rem + 0.8vw, 32px); line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; position: relative; text-wrap: balance; }
+
+/* ---------- Ihre Rechte ---------- */
+.op-facts { background: none; padding: 0; border-radius: 0; gap: var(--space-6) var(--space-6); }
+.op-fact { border-top: 2px solid var(--komp-navy); padding-top: var(--space-4); }
+.op-fact h3 .k-icon { display: none; }
+.op-fact h3 { font-size: 24px; line-height: 28px; }
+
+/* ---------- Ablauf: Maßlinie mit Teilstrichen ---------- */
+.k-section--navy { background-color: var(--komp-navy-deep); }
+.k-steps { gap: 0; border-top: 1px solid var(--rule-sky); }
+.k-step { padding: var(--space-6) var(--space-6) 0 0; }
+.k-step::before { content: ""; position: absolute; left: 0; top: -1px; height: 14px; border-left: 2px solid var(--komp-sky); }
+.k-step:not(:last-child)::after { display: none; }
+.k-step-no { width: auto; height: auto; border-radius: 0; background: none; place-items: start; font-size: clamp(56px, 3rem + 2vw, 80px); line-height: 1; font-weight: 700; color: var(--komp-sky); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.k-section--navy .k-step h3 { margin-top: var(--space-3); }
+
+/* ---------- FAQ ---------- */
+.k-faq { border-top-color: var(--line-strong); }
+.k-faq summary { font-size: clamp(21px, 1.1rem + 0.4vw, 24px); line-height: 1.2; }
+.k-faq summary::after { background: none; width: 28px; height: 28px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); font-size: 20px; }
+.k-faq details[open] summary::after { background: none; color: var(--komp-red); border-color: var(--komp-red); }
+.k-faq summary:hover { color: var(--komp-navy-deep); }
+.op-contact { border-radius: var(--radius-sm); background: var(--komp-navy-deep); }
+.op-contact h3 { font-size: 30px; line-height: 32px; letter-spacing: -0.01em; }
+.op-contact ul { border-top: 1px solid var(--rule-sky); padding-top: var(--space-4); }
+
+/* ---------- Schaden melden ---------- */
+.k-form-panel { border-radius: var(--radius-sm); box-shadow: none; border: 1px solid var(--line-strong); }
+.k-segment label { border-radius: var(--radius-sm); }
+.op-area { background: none; border: 0; padding: var(--space-6) 0 0; border-top: 1px solid var(--line-strong); border-radius: 0; }
+.op-area h3 .k-icon { display: none; }
+.op-area .op-chip { font-size: 18px; line-height: 28px; }
+.op-map { border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background-color: var(--surface);
+  background-image: linear-gradient(var(--surface-mist) 1px, transparent 1px), linear-gradient(90deg, var(--surface-mist) 1px, transparent 1px);
+  background-size: 32px 32px; background-position: center; }
+
+/* ---------- Footer ---------- */
+.k-footer .op-footer-h, .k-footer h4 { text-transform: none; letter-spacing: 0; font-size: 20px; }
+.op-footer-cta strong { letter-spacing: -0.02em; font-weight: 700; }
+
+@media (max-width: 1024px) {
+  .op-services-head { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .op-drawing { max-width: 560px; }
+  .op-feature { background-image: none; }
+}
+@media (max-width: 900px) {
+  .op-feature { grid-template-columns: minmax(0, 1fr); padding: var(--space-6); }
+  .k-steps { border-top: 0; }
+  .k-step { padding: var(--space-5) 0 var(--space-5) var(--space-6); border-left: 1px solid var(--rule-sky); }
+  .k-step::before { top: var(--space-6); left: -1px; height: 0; width: 14px; border-left: 0; border-top: 2px solid var(--komp-sky); }
+  .op-facts { grid-template-columns: minmax(0, 1fr); }
+  .op-quote { padding-left: 0; }
+  .op-chip { font-size: 18px; line-height: 28px; }
+}
