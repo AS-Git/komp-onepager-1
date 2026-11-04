@@ -4,6 +4,11 @@ OnePager für das **Ingenieur-Büro Komp**, KFZ-Sachverständige in Langen (Hess
 
 Sprache mit dem Auftraggeber: Deutsch.
 
+## Arbeitsweise
+
+- Lokale Arbeitskopie beim Auftraggeber: `C:\Temp\Komp\komp-onepager-1` (Branch `design-v3`). Änderungen dort vornehmen.
+- Jede abgeschlossene Änderung ohne Rückfrage auf `design-v3` committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
+
 ## Technik
 
 - Statisches HTML/CSS in `public/` (Webroot), ein PHP-Skript `public/senden.php` für das Schadensformular (PHPMailer per SMTP, Eingangsbestätigung an den Absender).
