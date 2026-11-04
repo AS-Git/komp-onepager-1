@@ -43,9 +43,8 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 
 - Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[FOTO]` (Porträt Dietmar Komp), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum bestätigt. Herr Thiel wird bewusst nur im Text genannt, nicht im Bereich „Über uns“.
 - Echte Fotos (Büro, Besichtigung, Dietmar Komp) wären der nächste große Gestaltungsschritt.
-- Formular auf dem Live-Server: Beim ersten Test kam „Die Meldung konnte nicht gesendet werden“. Die Ursache ist nicht geklärt. Zur Diagnose `'debug' => true` in `config/config.php` setzen, die Meldung `[Diagnose: …]` auswerten und danach wieder auf `false`.
-- `.htaccess` (HTTPS-Umleitung, HSTS, Content-Security-Policy, Zugriffssperren) ist nicht auf einem echten Apache getestet. Nach dem Upload prüfen: Seite lädt, http→https, Karte öffnet sich nach Klick. Bei „500 Internal Server Error“ das Fehlerlog ansehen.
 - Formular auf dem Testserver: Die vorgeschaltete Firewall hat eine Ausnahme für `/senden.php` (erledigt). Bei erneutem HTTP 403 zuerst diese Ausnahme prüfen.
+- Servertest erledigt: Formularversand (Meldung und Eingangsbestätigung), HTTPS-Umleitung, `.htaccess` und Karte funktionieren auf dem Testserver. Bei Formularproblemen `'debug' => true` in `config/config.php` setzen, `[Diagnose: …]` auswerten, danach wieder `false`.
 
 ## Spam- und Sicherheitsschutz (nicht abschwächen)
 
