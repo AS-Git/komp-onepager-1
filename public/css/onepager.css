@@ -411,7 +411,6 @@ body { margin: 0; }
 /* Links: Unterstreichung erscheint beim Zeigen */
 .k-footer a { text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .op-menu-contact a, .op-contact a { text-underline-offset: 4px; }
-.op-contact a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) {
   .k-btn:active, .op-menu-toggle:active { transform: none; }
   .op-menu:not([hidden]), .k-faq details[open] > div { animation: none; }
@@ -447,14 +446,14 @@ body { margin: 0; }
 @media screen {
   .op-motion .op-drawing:not(.is-in) .op-drawing-car * { stroke-dasharray: 1; stroke-dashoffset: 1; }
   .op-motion .op-drawing:not(.is-in) :is(.op-drawing-axes, .op-drawing-dim, .op-drawing-mark) { opacity: 0; }
-  .op-drawing.is-in .op-drawing-car * { animation: op-draw 1s var(--ease-out-quart) backwards; }
-  .op-drawing.is-in .op-drawing-car path:nth-of-type(1) { animation-duration: 1.2s; }
-  .op-drawing.is-in .op-drawing-car path:nth-of-type(2) { animation-delay: .25s; }
-  .op-drawing.is-in .op-drawing-car circle { animation-delay: .35s; animation-duration: .8s; }
-  .op-drawing.is-in .op-drawing-car path:nth-of-type(n+3) { animation-delay: .5s; animation-duration: .7s; }
-  .op-drawing.is-in .op-drawing-axes { animation: op-appear .5s var(--ease-out-quart) .1s backwards; }
-  .op-drawing.is-in .op-drawing-dim { animation: op-appear .5s var(--ease-out-quart) 1s backwards; }
-  .op-drawing.is-in .op-drawing-mark { animation: op-appear .4s var(--ease-out-quart) 1.3s backwards; }
+  .op-drawing.is-in .op-drawing-car * { animation: op-draw 1.4s var(--ease-out-quart) .35s backwards; }
+  .op-drawing.is-in .op-drawing-car path:nth-of-type(1) { animation-duration: 1.8s; }
+  .op-drawing.is-in .op-drawing-car path:nth-of-type(2) { animation-delay: .75s; }
+  .op-drawing.is-in .op-drawing-car circle { animation-delay: .9s; animation-duration: 1.1s; }
+  .op-drawing.is-in .op-drawing-car path:nth-of-type(n+3) { animation-delay: 1.15s; animation-duration: 1s; }
+  .op-drawing.is-in .op-drawing-axes { animation: op-appear .7s var(--ease-out-quart) .35s backwards; }
+  .op-drawing.is-in .op-drawing-dim { animation: op-appear .7s var(--ease-out-quart) 1.9s backwards; }
+  .op-drawing.is-in .op-drawing-mark { animation: op-appear .6s var(--ease-out-quart) 2.4s backwards; }
 }
 
 /* 2 · Ablauf: Maßlinie zieht sich, Teilstriche erscheinen nacheinander */
@@ -464,16 +463,43 @@ body { margin: 0; }
   .op-steps4 .k-steps { border-top-color: transparent; }
   .op-steps4 .k-steps::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; border-top: 1px solid var(--rule-sky); transform-origin: left center; }
 }
+@keyframes op-rise-soft { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media screen {
   .op-motion .k-steps:not(.is-in)::after { transform: scaleX(0); }
-  .op-motion .k-steps:not(.is-in) .k-step::before { opacity: 0; }
-  .k-steps.is-in::after { animation: op-scale-x .7s var(--ease-out-expo) backwards; }
-  .k-steps.is-in .k-step::before { animation: op-tick .35s var(--ease-out-quart) backwards; }
-  .k-steps.is-in .k-step:nth-child(1)::before { animation-delay: .15s; }
-  .k-steps.is-in .k-step:nth-child(2)::before { animation-delay: .27s; }
-  .k-steps.is-in .k-step:nth-child(3)::before { animation-delay: .39s; }
-  .k-steps.is-in .k-step:nth-child(4)::before { animation-delay: .51s; }
+  .op-motion .k-steps:not(.is-in) .k-step, .op-motion .k-steps:not(.is-in) .k-step::before { opacity: 0; }
+  .k-steps.is-in::after { animation: op-scale-x 1.8s cubic-bezier(.45, 0, .2, 1) backwards; }
+  .k-steps.is-in .k-step { animation: op-rise-soft .8s var(--ease-out-quart) backwards; }
+  .k-steps.is-in .k-step::before { animation: op-tick .5s var(--ease-out-quart) backwards; }
+  .k-steps.is-in .k-step:nth-child(1), .k-steps.is-in .k-step:nth-child(1)::before { animation-delay: .2s; }
+  .k-steps.is-in .k-step:nth-child(2), .k-steps.is-in .k-step:nth-child(2)::before { animation-delay: .6s; }
+  .k-steps.is-in .k-step:nth-child(3), .k-steps.is-in .k-step:nth-child(3)::before { animation-delay: 1s; }
+  .k-steps.is-in .k-step:nth-child(4), .k-steps.is-in .k-step:nth-child(4)::before { animation-delay: 1.4s; }
 }
+
+/* 3 · Zeitleiste: Lineal zieht sich nach unten, Einträge erscheinen nacheinander */
+@keyframes op-scale-y { from { transform: scaleY(0); } to { transform: none; } }
+.op-timeline::before { transform-origin: top center; }
+.op-timeline li::before { transform-origin: left center; }
+@media screen {
+  .op-motion .op-timeline:not(.is-in)::before { transform: scaleY(0); }
+  .op-timeline.is-in::before { animation: op-scale-y 2.4s cubic-bezier(.45, 0, .2, 1) backwards; }
+  .op-motion .op-timeline li:not(.is-in) { opacity: 0; }
+  .op-motion .op-timeline li:not(.is-in)::before { transform: scaleX(0); }
+  .op-timeline li.is-in { animation: op-rise-soft .9s var(--ease-out-quart) backwards; animation-delay: var(--d, .1s); }
+  .op-timeline li.is-in::before { animation: op-scale-x .6s var(--ease-out-quart) backwards; animation-delay: calc(var(--d, .1s) + .35s); }
+  /* Gleichzeitig sichtbare Einträge erscheinen trotzdem nacheinander */
+  .op-timeline li:nth-child(2) { --d: .45s; }
+  .op-timeline li:nth-child(3) { --d: .8s; }
+  .op-timeline li:nth-child(4) { --d: 1.15s; }
+  .op-motion .op-quote:not(.is-in) { opacity: 0; }
+  .op-quote.is-in { animation: op-rise-soft 1s var(--ease-out-quart) .6s backwards; }
+}
+
+/* Buttons: ein einheitlicher, sehr leiser Hover für alle (nie unterstrichen) */
+.k-root a.k-btn, .k-root a.k-btn:hover, .k-root a.k-btn:focus-visible { text-decoration: none; }
+.k-btn { transition: background-color .25s var(--ease-out-quart), border-color .25s var(--ease-out-quart), color .25s var(--ease-out-quart), box-shadow .3s var(--ease-out-quart), transform .25s var(--ease-out-quart); }
+.k-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -14px oklch(22% 0.06 258 / 0.55); }
+.k-btn:active { transform: translateY(0) scale(0.98); box-shadow: none; transition-duration: .1s; }
 
 /* 5 · Formular: Messlinie unter dem Feld bei Fokus, weiche Auswahl */
 .k-input { background-image: linear-gradient(var(--komp-blue), var(--komp-blue)); background-repeat: no-repeat; background-position: left bottom; background-size: 0% 2px;
@@ -506,5 +532,5 @@ body { margin: 0; }
 .op-map .k-link-arrow:hover, .op-map .k-link-arrow:focus-visible { text-underline-offset: 6px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .k-link-arrow:hover .k-icon, .k-link-arrow:focus-visible .k-icon { transform: none; }
+  .k-link-arrow:hover .k-icon, .k-link-arrow:focus-visible .k-icon, .k-btn:hover, .k-btn:active { transform: none; }
 }

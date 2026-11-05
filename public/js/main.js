@@ -37,14 +37,19 @@
   var reveals = document.querySelectorAll('[data-reveal]');
   if (reveals.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('op-motion');
-    var revealObserver = new IntersectionObserver(function (entries) {
+    var onReveal = function (entries, observer) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-in');
-        revealObserver.unobserve(entry.target);
+        observer.unobserve(entry.target);
       });
-    }, { threshold: 0.25 });
-    Array.prototype.forEach.call(reveals, function (el) { revealObserver.observe(el); });
+    };
+    // Standard: sobald ein Viertel sichtbar ist; „late“ (Zeichnung) erst, wenn sie fast ganz im Bild ist
+    var revealObserver = new IntersectionObserver(onReveal, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+    var lateObserver = new IntersectionObserver(onReveal, { threshold: 0.9 });
+    Array.prototype.forEach.call(reveals, function (el) {
+      (el.getAttribute('data-reveal') === 'late' ? lateObserver : revealObserver).observe(el);
+    });
   }
 
   // Karte erst nach Klick laden (DSGVO)

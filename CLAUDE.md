@@ -25,7 +25,7 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 | Branch | Inhalt |
 |---|---|
-| `design-v5` | **Arbeitsversion**: Version 4 plus feine Micro-Interactions „zeichnen und messen“ (Fahrzeugzeichnung zeichnet sich, Ablauf-Maßlinie, Messlinie im Formular, Telefonnummer, FAQ-Symbol, Textlinks). Ebene „Version 5“ am Ende von `public/css/onepager.css`, Auslöser in `public/js/main.js` (`data-reveal`, Klasse `op-motion`). Nur transform, opacity, stroke-dashoffset, background-size; bei „Bewegung reduzieren“ und ohne JavaScript alles sofort sichtbar |
+| `design-v5` | **Arbeitsversion**: Version 4 plus feine Micro-Interactions „zeichnen und messen“ (Fahrzeugzeichnung zeichnet sich erst, wenn sie fast ganz im Bild ist; Ablauf-Maßlinie mit nacheinander erscheinenden Schritten; Zeitleiste als Lineal mit gestaffelten Einträgen; Messlinie im Formular; Telefonnummer; FAQ-Symbol; Textlinks; einheitlicher leiser Hover für alle Buttons, nie unterstrichen). Ebene „Version 5“ am Ende von `public/css/onepager.css`, Auslöser in `public/js/main.js` (`data-reveal`, Klasse `op-motion`). Nur transform, opacity, stroke-dashoffset, background-size; bei „Bewegung reduzieren“ und ohne JavaScript alles sofort sichtbar |
 | `design-v4` | **In Abnahme, nicht ändern**: gleiche Inhalte wie `design-v3`, Gestaltung „Ingenieur-Zeichnung“ (Haarlinien statt Karten, präzise Ecken, Maßlinien, technische Fahrzeugzeichnung). Gestaltungsebene am Ende von `public/css/onepager.css` |
 | `design-v3` | **Eingefroren, 1:1 erhalten**: diesen Stand hat der Kunde gesehen. Nicht mehr ändern. Hero in Komp-Dunkelblau mit Konstruktionsraster |
 | `main` | Version 1: Umsetzung des ursprünglichen Designs, nur noch Archiv |
