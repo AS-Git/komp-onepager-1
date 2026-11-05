@@ -252,3 +252,14 @@ body { margin: 0; }
   .op-page { padding: var(--space-8) 0; }
   .op-page .k-h1 { font-size: 38px; line-height: 42px; overflow-wrap: break-word; }
 }
+
+/* Schaden melden: Formular direkt nach der Einleitung, Einsatzgebiet danach.
+   Desktop: Einsatzgebiet links unter der Einleitung, Formular rechts über beide Zeilen. */
+.op-report { grid-template-rows: auto 1fr; }
+.op-report > .k-form-panel { grid-column: 2; grid-row: 1 / span 2; }
+.op-report > .op-area { grid-column: 1; grid-row: 2; align-self: start; margin-top: calc(var(--space-6) - var(--space-7)); }
+@media (max-width: 900px) {
+  .op-report { grid-template-rows: none; }
+  .op-report > .k-form-panel, .op-report > .op-area { grid-column: auto; grid-row: auto; }
+  .op-report > .op-area { margin-top: var(--space-4); }
+}
