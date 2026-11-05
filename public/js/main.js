@@ -32,6 +32,21 @@
     window.matchMedia('(min-width: 901px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
   }
 
+  // Zeichnung und Ablauf bauen sich beim ersten Erscheinen einmal auf.
+  // Nur mit IntersectionObserver und ohne „Bewegung reduzieren“; sonst ist alles sofort sichtbar.
+  var reveals = document.querySelectorAll('[data-reveal]');
+  if (reveals.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('op-motion');
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.25 });
+    Array.prototype.forEach.call(reveals, function (el) { revealObserver.observe(el); });
+  }
+
   // Karte erst nach Klick laden (DSGVO)
   var map = document.querySelector('.op-map[data-map-src]');
   var mapLink = map && map.querySelector('[data-map-load]');

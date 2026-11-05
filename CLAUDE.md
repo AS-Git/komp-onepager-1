@@ -7,7 +7,8 @@ Sprache mit dem Auftraggeber: Deutsch.
 ## Arbeitsweise
 
 - Lokale Arbeitskopien beim Auftraggeber, getrennt nebeneinander:
-  - `C:\Temp\Komp\version-4` = Branch `design-v4` (Arbeitsversion)
+  - `C:\Temp\Komp\version-5` = Branch `design-v5` (Arbeitsversion)
+  - `C:\Temp\Komp\version-4` = Branch `design-v4` (in Abnahme; nur auf ausdrücklichen Wunsch ändern, dann nur dort)
   - `C:\Temp\Komp\version-3` = Branch `design-v3` (eingefroren; nur auf ausdrücklichen Wunsch ändern, dann nur dort)
   Änderungen im Ordner der jeweiligen Version vornehmen, nie zwischen den Versionen mischen.
 - Jede abgeschlossene Änderung ohne Rückfrage auf den Branch der jeweiligen Version committen und pushen (Commit-Nachricht auf Deutsch). Vorher die Tests unter „Testen“ laufen lassen; schlägt etwas fehl, nicht pushen, sondern melden.
@@ -24,14 +25,15 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 | Branch | Inhalt |
 |---|---|
-| `design-v4` | **Arbeitsversion**: gleiche Inhalte wie `design-v3`, Gestaltung „Ingenieur-Zeichnung“ (Haarlinien statt Karten, präzise Ecken, Maßlinien, technische Fahrzeugzeichnung). Gestaltungsebene am Ende von `public/css/onepager.css` |
+| `design-v5` | **Arbeitsversion**: Version 4 plus feine Micro-Interactions „zeichnen und messen“ (Fahrzeugzeichnung zeichnet sich, Ablauf-Maßlinie, Messlinie im Formular, Telefonnummer, FAQ-Symbol, Textlinks). Ebene „Version 5“ am Ende von `public/css/onepager.css`, Auslöser in `public/js/main.js` (`data-reveal`, Klasse `op-motion`). Nur transform, opacity, stroke-dashoffset, background-size; bei „Bewegung reduzieren“ und ohne JavaScript alles sofort sichtbar |
+| `design-v4` | **In Abnahme, nicht ändern**: gleiche Inhalte wie `design-v3`, Gestaltung „Ingenieur-Zeichnung“ (Haarlinien statt Karten, präzise Ecken, Maßlinien, technische Fahrzeugzeichnung). Gestaltungsebene am Ende von `public/css/onepager.css` |
 | `design-v3` | **Eingefroren, 1:1 erhalten**: diesen Stand hat der Kunde gesehen. Nicht mehr ändern. Hero in Komp-Dunkelblau mit Konstruktionsraster |
 | `main` | Version 1: Umsetzung des ursprünglichen Designs, nur noch Archiv |
 | `design-audit` | Version 2: Barrierefreiheit (WCAG 2.2 AA), Leistungen als nummerierte Liste, nur noch Archiv |
 
 **Abnahme:** `design-v3` (Stand `a225b10`) und `design-v4` (Stand `51c2b19`, danach nur `CLAUDE.md` geändert) liegen beim Kunden zur Abnahme. Bis zur Rückmeldung an der Website nichts ändern, nur auf ausdrücklichen Wunsch des Auftraggebers.
 
-Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v4`; `design-v3`, `main` und `design-audit` bleiben unverändert erhalten.
+Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v5`; `design-v4`, `design-v3`, `main` und `design-audit` bleiben unverändert erhalten.
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
 
@@ -41,7 +43,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 - Hero-Kicker: „Unabhängige KFZ-Sachverständige im Rhein-Main-Gebiet“.
 - Einsatzgebiet: Langen, Egelsbach, Dreieich, Offenthal, Neu-Isenburg, Rödermark, Mörfelden-Walldorf, Darmstadt, Frankfurt am Main (Chips, Footer, JSON-LD `areaServed`).
 - Logos in der Vertrauensleiste: BVSK, ADAC Vertragssachverständiger, GTÜ Vertragspartner (`public/img/*.webp`); IHK nur als Textsiegel.
-- Inhalte (Texte, Reihenfolge der Abschnitte) in `design-v4` identisch zu `design-v3` halten, solange der Auftraggeber nichts anderes sagt.
+- Inhalte (Texte, Reihenfolge der Abschnitte) in `design-v4` und `design-v5` identisch zu `design-v3` halten, solange der Auftraggeber nichts anderes sagt.
 - Keine Stockfotos von Unfallautos; keine Optik von Unfall-Portalen, Behörden, Baukasten-Templates oder Autohaus-Werbung (siehe `PRODUCT.md`).
 
 ## Offene Punkte

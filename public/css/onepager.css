@@ -431,3 +431,80 @@ body { margin: 0; }
   .op-quote { padding-left: 0; }
   .op-chip { font-size: 18px; line-height: 28px; }
 }
+
+/* ==========================================================================
+   Version 5: Micro-Interactions „zeichnen und messen“
+   Nur transform, opacity, stroke-dashoffset und background-size (kein Layout).
+   Bei „Bewegung reduzieren“ greift die globale Regel oben; die Einblendungen
+   beim Erscheinen setzt main.js dann gar nicht erst (Klasse .op-motion fehlt).
+   ========================================================================== */
+:root { --ease-out-quart: cubic-bezier(.25, 1, .5, 1); --ease-out-expo: cubic-bezier(.16, 1, .3, 1); }
+
+/* 1 · Fahrzeugzeichnung zeichnet sich einmal selbst */
+.op-drawing-car, .op-drawing-car * { vector-effect: none; }
+@keyframes op-draw { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
+@keyframes op-appear { from { opacity: 0; } to { opacity: 1; } }
+@media screen {
+  .op-motion .op-drawing:not(.is-in) .op-drawing-car * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .op-motion .op-drawing:not(.is-in) :is(.op-drawing-axes, .op-drawing-dim, .op-drawing-mark) { opacity: 0; }
+  .op-drawing.is-in .op-drawing-car * { animation: op-draw 1s var(--ease-out-quart) backwards; }
+  .op-drawing.is-in .op-drawing-car path:nth-of-type(1) { animation-duration: 1.2s; }
+  .op-drawing.is-in .op-drawing-car path:nth-of-type(2) { animation-delay: .25s; }
+  .op-drawing.is-in .op-drawing-car circle { animation-delay: .35s; animation-duration: .8s; }
+  .op-drawing.is-in .op-drawing-car path:nth-of-type(n+3) { animation-delay: .5s; animation-duration: .7s; }
+  .op-drawing.is-in .op-drawing-axes { animation: op-appear .5s var(--ease-out-quart) .1s backwards; }
+  .op-drawing.is-in .op-drawing-dim { animation: op-appear .5s var(--ease-out-quart) 1s backwards; }
+  .op-drawing.is-in .op-drawing-mark { animation: op-appear .4s var(--ease-out-quart) 1.3s backwards; }
+}
+
+/* 2 · Ablauf: Maßlinie zieht sich, Teilstriche erscheinen nacheinander */
+@keyframes op-scale-x { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes op-tick { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (min-width: 901px) {
+  .op-steps4 .k-steps { border-top-color: transparent; }
+  .op-steps4 .k-steps::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; border-top: 1px solid var(--rule-sky); transform-origin: left center; }
+}
+@media screen {
+  .op-motion .k-steps:not(.is-in)::after { transform: scaleX(0); }
+  .op-motion .k-steps:not(.is-in) .k-step::before { opacity: 0; }
+  .k-steps.is-in::after { animation: op-scale-x .7s var(--ease-out-expo) backwards; }
+  .k-steps.is-in .k-step::before { animation: op-tick .35s var(--ease-out-quart) backwards; }
+  .k-steps.is-in .k-step:nth-child(1)::before { animation-delay: .15s; }
+  .k-steps.is-in .k-step:nth-child(2)::before { animation-delay: .27s; }
+  .k-steps.is-in .k-step:nth-child(3)::before { animation-delay: .39s; }
+  .k-steps.is-in .k-step:nth-child(4)::before { animation-delay: .51s; }
+}
+
+/* 5 · Formular: Messlinie unter dem Feld bei Fokus, weiche Auswahl */
+.k-input { background-image: linear-gradient(var(--komp-blue), var(--komp-blue)); background-repeat: no-repeat; background-position: left bottom; background-size: 0% 2px;
+  transition: border-color .2s var(--ease-out-quart), outline-color .2s var(--ease-out-quart), background-size .3s var(--ease-out-quart); }
+.k-input:focus { background-size: 100% 2px; outline: 3px solid oklch(52% 0.14 245 / 0.3); outline-offset: 0; border-color: var(--komp-blue); }
+.k-segment label { transition: background-color .2s var(--ease-out-quart), border-color .2s var(--ease-out-quart), color .2s var(--ease-out-quart); }
+.k-segment label:hover { border-color: var(--komp-navy); }
+
+/* 6 · Große Telefonnummer: zweite Linie zieht sich über die rote */
+.op-bigphone-no { text-decoration: none; padding-bottom: 6px; margin-bottom: -6px;
+  background-image: linear-gradient(var(--komp-sky), var(--komp-sky)), linear-gradient(var(--komp-red), var(--komp-red));
+  background-repeat: no-repeat; background-position: left bottom, left bottom; background-size: 0% 3px, 100% 3px;
+  transition: background-size .35s var(--ease-out-quart); }
+.op-bigphone:hover .op-bigphone-no, .op-bigphone:focus-visible .op-bigphone-no { background-size: 100% 3px, 100% 3px; }
+
+/* 7 · FAQ: Plus dreht sich zum Minus */
+.k-faq summary::after { content: ""; font-size: 0;
+  background: linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 12px no-repeat;
+  transition: transform .3s var(--ease-out-quart), background-size .3s var(--ease-out-quart), border-color .2s, color .2s; }
+.k-faq details[open] summary::after { content: ""; transform: rotate(90deg);
+  background: linear-gradient(currentColor, currentColor) center / 0 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 12px no-repeat; }
+
+/* 8 · Textlinks: Linie zieht sich, Pfeil rückt vor */
+.k-footer .k-cols a, .op-contact li a, .op-menu-contact a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: left 100%; background-size: 0% 1px; transition: background-size .25s var(--ease-out-quart); }
+.k-footer .k-cols a:hover, .k-footer .k-cols a:focus-visible, .op-contact li a:hover, .op-contact li a:focus-visible, .op-menu-contact a:hover, .op-menu-contact a:focus-visible { text-decoration: none; background-size: 100% 1px; }
+.op-menu-contact a { background-size: 100% 1px; }
+.k-link-arrow .k-icon { transition: transform .2s var(--ease-out-quart); }
+.k-link-arrow:hover .k-icon, .k-link-arrow:focus-visible .k-icon { transform: translateX(3px); }
+.op-map .k-link-arrow { transition: text-underline-offset .2s var(--ease-out-quart), text-decoration-color .2s; }
+.op-map .k-link-arrow:hover, .op-map .k-link-arrow:focus-visible { text-underline-offset: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .k-link-arrow:hover .k-icon, .k-link-arrow:focus-visible .k-icon { transform: none; }
+}
