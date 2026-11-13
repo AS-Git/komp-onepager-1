@@ -1,8 +1,9 @@
 @echo off
-rem Richtet Version 3 und Version 4 des Komp OnePagers getrennt nebeneinander ein:
-rem   C:\Temp\Komp\version-3  (Branch design-v3, eingefroren)
-rem   C:\Temp\Komp\version-4  (Branch design-v4, in Abnahme)
-rem   C:\Temp\Komp\version-5  (Branch design-v5, Arbeitsversion)
+rem Richtet die Arbeitskopien des Komp OnePagers getrennt nebeneinander ein:
+rem   C:\Temp\Komp\live       (Branch live, Arbeitsversion)
+rem   C:\Temp\Komp\version-3  (Branch design-v3, Archiv)
+rem   C:\Temp\Komp\version-4  (Branch design-v4, Archiv)
+rem   C:\Temp\Komp\version-5  (Branch design-v5, Archiv)
 rem Voraussetzung: Git fuer Windows (https://git-scm.com/download/win)
 
 set REPO=https://github.com/AS-Git/komp-onepager-1.git
@@ -24,6 +25,12 @@ if exist "%ZIEL%\.git" (
 
 if not exist "%ZIEL%" mkdir "%ZIEL%"
 
+if exist "%ZIEL%\live" (
+  echo live ist schon vorhanden, wird uebersprungen.
+) else (
+  git clone -b live %REPO% "%ZIEL%\live" || goto fehler
+)
+
 if exist "%ZIEL%\version-3" (
   echo version-3 ist schon vorhanden, wird uebersprungen.
 ) else (
@@ -43,12 +50,13 @@ if exist "%ZIEL%\version-5" (
 
 echo.
 echo Fertig:
-echo   %ZIEL%\version-3  = Version 3 (Branch design-v3)
-echo   %ZIEL%\version-4  = Version 4 (Branch design-v4)
-echo   %ZIEL%\version-5  = Version 5 (Branch design-v5)
+echo   %ZIEL%\live       = Arbeitsversion (Branch live)
+echo   %ZIEL%\version-3  = Version 3 (Branch design-v3, Archiv)
+echo   %ZIEL%\version-4  = Version 4 (Branch design-v4, Archiv)
+echo   %ZIEL%\version-5  = Version 5 (Branch design-v5, Archiv)
 echo.
 echo Naechster Schritt: In der Claude-Desktop-App eine Claude-Code-Sitzung
-echo mit dem Ordner der Version starten, an der gearbeitet werden soll.
+echo mit dem Ordner %ZIEL%\live starten.
 pause
 exit /b 0
 

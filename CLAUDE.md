@@ -6,8 +6,10 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 ## Arbeitsweise
 
+- **Version 5 ist gewählt.** Gearbeitet wird nur noch im Branch `live` (Standard-Branch auf GitHub), entstanden aus `design-v5` (Stand `18dafbe`).
 - Lokale Arbeitskopien beim Auftraggeber, getrennt nebeneinander:
-  - `C:\Temp\Komp\version-5` = Branch `design-v5` (Arbeitsversion)
+  - `C:\Temp\Komp\live` = Branch `live` (**Arbeitsversion**, alle Änderungen nur hier)
+  - `C:\Temp\Komp\version-5` = Branch `design-v5` (Archiv, nicht mehr ändern)
   - `C:\Temp\Komp\version-4` = Branch `design-v4` (in Abnahme; nur auf ausdrücklichen Wunsch ändern, dann nur dort)
   - `C:\Temp\Komp\version-3` = Branch `design-v3` (eingefroren; nur auf ausdrücklichen Wunsch ändern, dann nur dort)
   Änderungen im Ordner der jeweiligen Version vornehmen, nie zwischen den Versionen mischen.
@@ -25,7 +27,8 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 | Branch | Inhalt |
 |---|---|
-| `design-v5` | **Arbeitsversion**: Version 4 plus feine Micro-Interactions „zeichnen und messen“ (Fahrzeugzeichnung zeichnet sich erst, wenn sie fast ganz im Bild ist; Ablauf-Maßlinie mit nacheinander erscheinenden Schritten; Zeitleiste als Lineal mit gestaffelten Einträgen; Messlinie im Formular; Telefonnummer; FAQ-Symbol; Textlinks; einheitlicher leiser Hover für alle Buttons, nie unterstrichen). Ebene „Version 5“ am Ende von `public/css/onepager.css`, Auslöser in `public/js/main.js` (`data-reveal`, Klasse `op-motion`). Nur transform, opacity, stroke-dashoffset, background-size; bei „Bewegung reduzieren“ und ohne JavaScript alles sofort sichtbar |
+| `live` | **Arbeitsversion und Standard-Branch**: aus `design-v5` erstellt, Version 5 ist gewählt. Alle Änderungen nur hier |
+| `design-v5` | **Archiv** (Ausgangsstand von `live`): Version 4 plus feine Micro-Interactions „zeichnen und messen“ (Fahrzeugzeichnung zeichnet sich erst, wenn sie fast ganz im Bild ist; Ablauf-Maßlinie mit nacheinander erscheinenden Schritten; Zeitleiste als Lineal mit gestaffelten Einträgen; Messlinie im Formular; Telefonnummer; FAQ-Symbol; Textlinks; einheitlicher leiser Hover für alle Buttons, nie unterstrichen). Ebene „Version 5“ am Ende von `public/css/onepager.css`, Auslöser in `public/js/main.js` (`data-reveal`, Klasse `op-motion`). Nur transform, opacity, stroke-dashoffset, background-size; bei „Bewegung reduzieren“ und ohne JavaScript alles sofort sichtbar |
 | `design-v4` | **In Abnahme, nicht ändern**: gleiche Inhalte wie `design-v3`, Gestaltung „Ingenieur-Zeichnung“ (Haarlinien statt Karten, präzise Ecken, Maßlinien, technische Fahrzeugzeichnung). Gestaltungsebene am Ende von `public/css/onepager.css` |
 | `design-v3` | **Eingefroren, 1:1 erhalten**: diesen Stand hat der Kunde gesehen. Nicht mehr ändern. Hero in Komp-Dunkelblau mit Konstruktionsraster |
 | `main` | Version 1: Umsetzung des ursprünglichen Designs, nur noch Archiv |
@@ -33,7 +36,7 @@ Sprache mit dem Auftraggeber: Deutsch.
 
 **Abnahme:** `design-v3` (Stand `a225b10`; danach auf Wunsch des Auftraggebers nur: mobil Formular vor Einsatzgebiet) und `design-v4` (Stand `51c2b19`; danach auf Wunsch des Auftraggebers nur: mobil Formular vor Einsatzgebiet) liegen beim Kunden zur Abnahme. Bis zur Rückmeldung an der Website nichts ändern, nur auf ausdrücklichen Wunsch des Auftraggebers.
 
-Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `design-v5`; `design-v4`, `design-v3`, `main` und `design-audit` bleiben unverändert erhalten.
+Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noch nicht auf GitHub). Änderungen nur noch in `live`; `design-v5`, `design-v4`, `design-v3`, `main` und `design-audit` bleiben unverändert erhalten.
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
 
@@ -71,15 +74,15 @@ Schlägt ein Test fehl, nicht pushen, sondern melden.
 
 ## Lokale Einrichtung beim Auftraggeber
 
-Git, PHP 8.x, Node.js (LTS), Composer installieren. `werkzeuge/komp-einrichten.bat` legt `C:\Temp\Komp\version-3/-4/-5` an. Je Arbeitskopie einmal `composer install --no-dev`, dann in `werkzeuge`: `npm install` und `npx playwright install chromium`. `config/config.php` (SMTP) liegt nicht im Repository; für echte Mailtests vom Server kopieren.
+Git, PHP 8.x, Node.js (LTS), Composer installieren. `werkzeuge/komp-einrichten.bat` legt `C:\Temp\Komp\live` und `C:\Temp\Komp\version-3/-4/-5` an. Je Arbeitskopie einmal `composer install --no-dev`, dann in `werkzeuge`: `npm install` und `npx playwright install chromium`. `config/config.php` (SMTP) liegt nicht im Repository; für echte Mailtests vom Server kopieren.
 
 ## Livegang und danach
 
-1. Der Kunde wählt eine Version (voraussichtlich Version 5).
-2. Daraus wird der Branch `live` erstellt (`git switch -c live design-v5`, dann `git push -u origin live`). `main` bleibt unverändert als Archiv von Version 1.
+1. ✔ Version 5 ist gewählt (13.11.2026).
+2. ✔ Branch `live` aus `design-v5` erstellt und gepusht, auf GitHub als Standard-Branch eingestellt, Arbeitskopie `C:\Temp\Komp\live` angelegt. `main` bleibt unverändert als Archiv von Version 1.
 3. Upload-Paket mit `npm run paket` bauen, hochladen, auf dem Server prüfen (Formular mit `debug`, http→https, Karte), danach `debug` wieder `false`.
 4. Den veröffentlichten Stand markieren: `git tag live-JJJJ-MM-TT` und `git push origin live-JJJJ-MM-TT`. Zurück auf einen früheren Stand: Tag auschecken, Paket bauen, hochladen.
-5. Ab dann gilt: Arbeitskopie `C:\Temp\Komp\live` (`git clone -b live …`), alle Änderungen nur in `live`, jede Änderung testen, committen, pushen; jede Veröffentlichung bekommt einen neuen Tag. `design-v3/-v4/-v5` bleiben als Archiv unverändert. Im GitHub-Repository den Standard-Branch auf `live` stellen.
+5. Ab dann gilt: Arbeitskopie `C:\Temp\Komp\live` (`git clone -b live …`), alle Änderungen nur in `live`, jede Änderung testen, committen, pushen; jede Veröffentlichung bekommt einen neuen Tag. `design-v3/-v4/-v5` bleiben als Archiv unverändert.
 6. Beim Livegang `[DOMAIN]` prüfen (Canonical und JSON-LD zeigen bereits auf https://www.kfz-sachverstaendiger-komp.de/).
 
 ## Entscheidungen und Begründungen

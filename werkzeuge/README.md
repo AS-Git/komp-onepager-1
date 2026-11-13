@@ -7,14 +7,14 @@ Läuft unter Windows, macOS und Linux. Alle Befehle im Ordner `werkzeuge` ausfü
 Voraussetzungen: Git, PHP 8.x, Node.js (LTS) und Composer.
 
 ```
-cd ..                       # Projektordner, z. B. C:\Temp\Komp\version-5
+cd ..                       # Projektordner, z. B. C:\Temp\Komp\live
 composer install --no-dev   # PHPMailer nach vendor/
 cd werkzeuge
 npm install
 npx playwright install chromium
 ```
 
-`komp-einrichten.bat` legt unter Windows die Arbeitskopien `C:\Temp\Komp\version-3`, `-4` und `-5` an.
+`komp-einrichten.bat` legt unter Windows die Arbeitskopie `C:\Temp\Komp\live` (Branch `live`) und die Archive `C:\Temp\Komp\version-3`, `-4` und `-5` an.
 
 ## Befehle
 
