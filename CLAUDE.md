@@ -50,7 +50,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 ## Offene Punkte
 
 - Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum bestätigt. Herr Thiel wird in Version 5 nur im Impressum genannt.
-- Das Porträt von Dietmar Komp ist in Version 5 auf Kundenwunsch entfallen. Echte Fotos von Büro oder Besichtigung wären weiterhin ein möglicher Gestaltungsschritt.
+- Das Porträt von Dietmar Komp ist in Version 5 auf Kundenwunsch entfallen (Version 3/4 haben noch den Platzhalter `[FOTO]`). Echte Fotos von Büro oder Besichtigung wären weiterhin ein möglicher Gestaltungsschritt.
 - Formular auf dem Testserver: Die vorgeschaltete Firewall hat eine Ausnahme für `/senden.php` (erledigt). Bei erneutem HTTP 403 zuerst diese Ausnahme prüfen.
 - Servertest erledigt: Formularversand (Meldung und Eingangsbestätigung), HTTPS-Umleitung, `.htaccess` und Karte funktionieren auf dem Testserver. Bei Formularproblemen `'debug' => true` in `config/config.php` setzen, `[Diagnose: …]` auswerten, danach wieder `false`.
 
