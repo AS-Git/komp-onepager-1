@@ -49,7 +49,7 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 
 ## Offene Punkte
 
-- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum bestätigt. Herr Thiel wird bewusst nur im Text genannt, nicht im Bereich „Über uns“.
+- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum bestätigt. Herr Thiel wird in Version 5 nur im Impressum genannt.
 - Das Porträt von Dietmar Komp ist in Version 5 auf Kundenwunsch entfallen. Echte Fotos von Büro oder Besichtigung wären weiterhin ein möglicher Gestaltungsschritt.
 - Formular auf dem Testserver: Die vorgeschaltete Firewall hat eine Ausnahme für `/senden.php` (erledigt). Bei erneutem HTTP 403 zuerst diese Ausnahme prüfen.
 - Servertest erledigt: Formularversand (Meldung und Eingangsbestätigung), HTTPS-Umleitung, `.htaccess` und Karte funktionieren auf dem Testserver. Bei Formularproblemen `'debug' => true` in `config/config.php` setzen, `[Diagnose: …]` auswerten, danach wieder `false`.
@@ -60,4 +60,40 @@ Honeypot-Feld `website`, Mindest-Ausfüllzeit 3 s (`t`), max. 5 Meldungen pro IP
 
 ## Testen
 
-`php -S 127.0.0.1:8080 -t public`; für Mailtests einen lokalen SMTP-Sink in `config.php` eintragen (`'secure' => 'none'`). Barrierefreiheit wurde mit axe-core (WCAG 2.2 AA) geprüft: auf Desktop 1280 px und Mobil 390 px ohne Verstöße, ohne horizontales Scrollen.
+Werkzeuge im Ordner `werkzeuge/` (Anleitung: `werkzeuge/README.md`), unter Windows wie Linux:
+
+- `npm test`: Pflicht vor jedem Commit. WCAG 2.2 AA mit axe-core auf allen fünf Seiten (Desktop 1280 px, Handy 390 px), kein seitliches Scrollen, keine Skriptfehler, Menü und Sprungmarken, Formularhinweis, Karte erst nach Klick, Formular vor Einsatzgebiet (mobil), Logoleiste im ersten Bildschirm, „Bewegung reduzieren“ und ohne JavaScript alles sichtbar, JSON-LD gültig, `senden.php` ohne Syntaxfehler.
+- `npm run test:formular`: nach Änderungen an `senden.php` oder am Formular. Echte Meldung und alle Spamschutz-Regeln mit eingebautem Test-Mailserver; sichert und restauriert eine vorhandene `config/config.php`.
+- `npm run paket`: Upload-ZIP aus dem committeten Stand nach `werkzeuge/ausgabe/`.
+- `npm run vorschau`: lokale Vorschau unter http://127.0.0.1:8080/.
+
+Schlägt ein Test fehl, nicht pushen, sondern melden.
+
+## Lokale Einrichtung beim Auftraggeber
+
+Git, PHP 8.x, Node.js (LTS), Composer installieren. `werkzeuge/komp-einrichten.bat` legt `C:\Temp\Komp\version-3/-4/-5` an. Je Arbeitskopie einmal `composer install --no-dev`, dann in `werkzeuge`: `npm install` und `npx playwright install chromium`. `config/config.php` (SMTP) liegt nicht im Repository; für echte Mailtests vom Server kopieren.
+
+## Livegang und danach
+
+1. Der Kunde wählt eine Version (voraussichtlich Version 5).
+2. Daraus wird der Branch `live` erstellt (`git switch -c live design-v5`, dann `git push -u origin live`). `main` bleibt unverändert als Archiv von Version 1.
+3. Upload-Paket mit `npm run paket` bauen, hochladen, auf dem Server prüfen (Formular mit `debug`, http→https, Karte), danach `debug` wieder `false`.
+4. Den veröffentlichten Stand markieren: `git tag live-JJJJ-MM-TT` und `git push origin live-JJJJ-MM-TT`. Zurück auf einen früheren Stand: Tag auschecken, Paket bauen, hochladen.
+5. Ab dann gilt: Arbeitskopie `C:\Temp\Komp\live` (`git clone -b live …`), alle Änderungen nur in `live`, jede Änderung testen, committen, pushen; jede Veröffentlichung bekommt einen neuen Tag. `design-v3/-v4/-v5` bleiben als Archiv unverändert. Im GitHub-Repository den Standard-Branch auf `live` stellen.
+6. Beim Livegang `[DOMAIN]` prüfen (Canonical und JSON-LD zeigen bereits auf https://www.kfz-sachverstaendiger-komp.de/).
+
+## Entscheidungen und Begründungen
+
+- **Kein Captcha.** Unfallopfer sollen ohne Hürde melden können. Spamschutz in Stufen (siehe oben). Falls im Betrieb Spam ankommt, in dieser Reihenfolge nachrüsten: (1) Zeitfeld `t` zur Pflicht machen (schließt Direktversand ohne Browser aus; ohne JavaScript dann nur Telefon), (2) Tageslimit insgesamt, (3) datenschutzfreundliches Captcha (ALTCHA selbst gehostet oder Friendly Captcha). Bisher nicht umgesetzt, Entscheidung des Auftraggebers offen.
+- **`senden.php` liegt im Webroot**, weil das Formular eine erreichbare Adresse braucht; Geheimnisse liegen in `config/` und `vendor/` außerhalb. Auf dem Testserver blockierte eine vorgeschaltete Firewall `.php`-Aufrufe (HTTP 403 „Anders und Seim stopped this request“); dafür gibt es eine Ausnahme für `/senden.php`.
+- **GTÜ-Hinweis im HU-Block bleibt** („Im Namen und auf Rechnung der GTÜ …“), obwohl das Impressum keine Aufsichtsbehörde mehr nennt: Prüfstellen-Partner brauchen diesen Hinweis in der Regel.
+- **Datenschutz:** keine Cookies, kein Tracking, Schriften lokal, Google Maps erst nach Klick. Deshalb kein Cookie-Banner. Hoster Mittwald (Auftragsverarbeitung). Wer Dienste ergänzt (Analyse, Maps ohne Klick, externe Schriften), muss die Datenschutzerklärung anpassen.
+- **Logoleiste im ersten Bildschirm** (Desktop): Hero-Höhe nicht vergrößern, ohne das zu prüfen (`npm test`).
+- **Mobil Formular vor Einsatzgebiet:** Die Sprungmarke „Schaden melden“ landet eindeutig beim Formular. Umgesetzt über die Reihenfolge im HTML (nicht per CSS `order`), damit auch Tastatur und Screenreader das Formular zuerst erreichen; Desktop-Anordnung per Grid.
+- **Mobiles Menü:** Hamburger mit Navigation, „Schaden melden“, Anrufen, E-Mail, Adresse, Öffnungszeiten; Impressum und Datenschutz nur im Footer (Kundenwunsch). Unterseiten verlinken auf Sprungmarken der Startseite (`./#faq`).
+- **Bewegung (Version 5):** nur transform, opacity, stroke-dashoffset, background-size; keine Layout-Verschiebung; Einblendungen nur einmal und erst im Bild (`data-reveal`, `data-reveal="late"` für die Zeichnung). Bei „Bewegung reduzieren“, ohne JavaScript und im Druck alles sofort sichtbar.
+- **Einsatzgebiet Variante A:** Orte 16 px, engere Schrägstriche, Desktop zwei Zeilen. Variante B mit weiteren Städten (Offenbach, Dietzenbach, Seligenstadt, Rüsselsheim, Dieburg, Hofheim, Hanau, Maintal) wurde vorgeschlagen, aber nicht gewählt.
+- **Footer-Einsatzgebiet** formal korrekt („Kreise … sowie Frankfurt und Hanau“): Hanau gehört zum Main-Kinzig-Kreis, Frankfurt ist kreisfrei.
+- **Kein übernommener Fremdtext:** Abgleich mit gutachter-kiwi.de (Nov. 2026) ergab nur branchenübliche Wendungen, keine kopierten Sätze.
+- **Upload-Pakete** mit Dateirechten 644/755 und ohne `.git` in `vendor/` (gruppen-schreibbare Dateien können auf Servern zu Fehlern führen).
+- **Version 3 und 4 eingefroren**, weil der Kunde diese Stände gesehen hat; Version 3/4 bekamen nach der Abnahme nur die mobile Umstellung Formular/Einsatzgebiet.

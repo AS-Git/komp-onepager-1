@@ -19,6 +19,7 @@ public/              Webroot (Document Root des Hostings hierauf zeigen lassen)
 config/
   config.example.php Vorlage für SMTP und Empfänger
 vendor/              PHPMailer (per Composer, nicht im Repository)
+werkzeuge/           Vorschau, Tests und Paketbau (Node.js), siehe werkzeuge/README.md
 ```
 
 `config/` und `vendor/` liegen bewusst außerhalb des Webroots.
@@ -42,11 +43,8 @@ landet im PHP-Fehlerlog des Hostings. Danach wieder auf `false` stellen.
 
 ## Lokal testen
 
-```
-php -S 127.0.0.1:8080 -t public
-```
-
-Für Tests ohne echten Mailserver in `config.php` einen lokalen SMTP-Testserver eintragen (`'secure' => 'none'`).
+Vorschau, automatische Tests und Upload-Paket: siehe `werkzeuge/README.md` (`npm run vorschau`, `npm test`, `npm run test:formular`, `npm run paket`).
+Ohne Node.js reicht für eine schnelle Vorschau auch `php -S 127.0.0.1:8080 -t public`.
 
 ## Formular
 

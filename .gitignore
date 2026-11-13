@@ -1,3 +1,5 @@
 /vendor/
 /config/config.php
 .DS_Store
+/werkzeuge/node_modules/
+/werkzeuge/ausgabe/
