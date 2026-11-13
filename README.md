@@ -60,5 +60,4 @@ Für Tests ohne echten Mailserver in `config.php` einen lokalen SMTP-Testserver 
 Im Code mit `[…]` markiert:
 
 - `[DOMAIN]` Canonical und JSON-LD-URL in `index.html`
-- `[FOTO]` Porträt Dietmar Komp
 - `[BEWERTUNGEN]`, `[GOOGLE-PROFIL]` echte Google-Bewertungen und Link zum Unternehmensprofil

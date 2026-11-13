@@ -545,3 +545,14 @@ body { margin: 0; }
   .op-report > .k-form-panel, .op-report > .op-area { grid-column: auto; grid-row: auto; }
   .op-report > .op-area { margin-top: var(--space-4); }
 }
+
+/* Kundenänderungen November: Plakette, Kürzel, „Über uns“ ohne Foto */
+.op-badge { display: inline-block; vertical-align: 0.3em; margin-left: var(--space-2); padding: 2px 8px; border: 1px solid var(--komp-red); border-radius: var(--radius-sm);
+  font-family: var(--font-display); font-size: 14px; line-height: 18px; font-weight: 600; letter-spacing: 0.02em; color: var(--komp-red); white-space: nowrap; }
+.k-seal abbr[title] { text-decoration: none; cursor: help; }
+/* Einleitung links bleibt beim Lesen des Zeitstrahls stehen; Zitat schließt sie ab */
+.op-about-intro .op-quote { padding: var(--space-6) 0 0; margin-top: var(--space-7); border-top: 1px solid var(--line); max-width: 30ch; }
+@media (min-width: 901px) {
+  .op-about { align-items: start; }
+  .op-about-intro { position: sticky; top: calc(var(--header-height) + var(--space-7)); }
+}

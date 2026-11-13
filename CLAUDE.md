@@ -37,19 +37,20 @@ Tag `v1` = Stand von Version 1 vor den inhaltlichen Korrekturen (liegt evtl. noc
 
 ## Inhaltliche Festlegungen (vom Auftraggeber)
 
-- **Öffentlich bestellt und vereidigt ist nur Dipl.-Ing. Werner Thiel** (IHK Offenbach am Main, Kraftfahrzeugschäden und -bewertung), nicht Dietmar Komp. Formulierungen wie „IHK-Sachverständiger“ (Hero) oder „bestellter Sachverständiger im Team“ (Siegel), nie so, dass Herr Komp oder das ganze Büro bestellt wirkt. Angaben zur Bestellung stehen im Impressum.
+- **Öffentlich bestellt und vereidigt ist nur Dipl.-Ing. Werner Thiel** (IHK Offenbach am Main, Kraftfahrzeugschäden und -bewertung), nicht Dietmar Komp. Formulierungen wie „IHK-Sachverständiger“ (Hero) oder „ö.b.u.v. Sachverständiger im Team“ (Siegel, Version 5), nie so, dass Herr Komp oder das ganze Büro bestellt wirkt. Angaben zur Bestellung stehen im Impressum; auf der Startseite wird Herr Thiel in Version 5 nicht mehr namentlich genannt.
 - **Dieter Komp ist verstorben.** Nie als aktiv tätig nennen. Heute leitet **Dipl.-Ing. Dietmar Komp** das Büro. In der Firmengeschichte bleibt „1977: Dieter Komp wird Partner … prägt das Büro über Jahrzehnte“.
 - **„Seit den 1950er Jahren“ nicht im Hero und nicht in der Meta-Description** (wirkt altbacken). In der Firmengeschichte ist es in Ordnung.
-- Hero-Kicker: „Unabhängige KFZ-Sachverständige im Rhein-Main-Gebiet“.
-- Einsatzgebiet: Langen, Egelsbach, Dreieich, Offenthal, Neu-Isenburg, Rödermark, Mörfelden-Walldorf, Darmstadt, Frankfurt am Main (Chips, Footer, JSON-LD `areaServed`).
+- Hero-Kicker: „Unabhängige KFZ-Sachverständige im Großraum Rhein-Main“ (Version 5; Version 3/4: „im Rhein-Main-Gebiet“).
+- **Kundenänderungen November (nur Version 5):** überall „Großraum Rhein-Main“ statt „Rhein-Main-Gebiet“; Öffnungszeiten Mo–Fr 07:30–17:00 Uhr (auch JSON-LD und Eingangsbestätigung in `senden.php`); „Wertermittlung & Oldtimer“ mit Plakette „GTÜ-Classic-Partner“; HU-Termin „in einer unserer Partnerwerkstätten“; „Beweiskräftig – Unsere Gutachten halten jeder Prüfung stand.“; „Sie sprechen direkt mit uns“; Ablauf Schritt 2 „begutachten“; FAQ „Zulassungsbescheinigung Teil I (Fahrzeugschein)“; kein Foto von Dietmar Komp, Zitat steht links unter der Einleitung; Impressum ohne Aufsichtsbehörde.
+- Einsatzgebiet neben dem Formular (Version 5): Langen, Egelsbach, Dreieich, Neu-Isenburg, Rödermark, Rodgau, Mörfelden-Walldorf, Groß-Gerau, Darmstadt, Frankfurt am Main (auch JSON-LD `areaServed`). Footer (Version 5): „Landkreise Offenbach, Hanau, Groß-Gerau, Darmstadt-Dieburg, Main-Taunus und Frankfurt“ (Wortlaut des Kunden).
 - Logos in der Vertrauensleiste: BVSK, ADAC Vertragssachverständiger, GTÜ Vertragspartner (`public/img/*.webp`); IHK nur als Textsiegel.
-- Inhalte (Texte, Reihenfolge der Abschnitte) in `design-v4` und `design-v5` identisch zu `design-v3` halten, solange der Auftraggeber nichts anderes sagt.
+- Inhalte in `design-v4` identisch zu `design-v3` halten. `design-v5` hat die Kundenänderungen vom November und weicht inhaltlich ab.
 - Keine Stockfotos von Unfallautos; keine Optik von Unfall-Portalen, Behörden, Baukasten-Templates oder Autohaus-Werbung (siehe `PRODUCT.md`).
 
 ## Offene Punkte
 
-- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[FOTO]` (Porträt Dietmar Komp), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum bestätigt. Herr Thiel wird bewusst nur im Text genannt, nicht im Bereich „Über uns“.
-- Echte Fotos (Büro, Besichtigung, Dietmar Komp) wären der nächste große Gestaltungsschritt.
+- Platzhalter im Code mit `[…]` markiert: `[DOMAIN]` (Canonical, JSON-LD), `[BEWERTUNGEN]` und `[GOOGLE-PROFIL]` (Bewertungs-Sektion ist per `hidden` ausgeblendet, bis echte Google-Bewertungen vorliegen), Impressum und Datenschutz sind aus der bisherigen Website übernommen (Stand Datenschutz Dez. 2024), die Datenschutzerklärung ist an diese Seite angepasst (keine Cookies, Schadensformular, Spamschutz, lokale Schriften, Google Maps erst nach Klick). Hoster bleibt Mittwald (bestätigt). Adresse der IHK Offenbach im Impressum bestätigt. Herr Thiel wird bewusst nur im Text genannt, nicht im Bereich „Über uns“.
+- Das Porträt von Dietmar Komp ist in Version 5 auf Kundenwunsch entfallen. Echte Fotos von Büro oder Besichtigung wären weiterhin ein möglicher Gestaltungsschritt.
 - Formular auf dem Testserver: Die vorgeschaltete Firewall hat eine Ausnahme für `/senden.php` (erledigt). Bei erneutem HTTP 403 zuerst diese Ausnahme prüfen.
 - Servertest erledigt: Formularversand (Meldung und Eingangsbestätigung), HTTPS-Umleitung, `.htaccess` und Karte funktionieren auf dem Testserver. Bei Formularproblemen `'debug' => true` in `config/config.php` setzen, `[Diagnose: …]` auswerten, danach wieder `false`.
 

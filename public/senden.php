@@ -241,7 +241,7 @@ if ($email !== '' && !empty($config['confirmation'])
         $mail->Body =
             "Guten Tag,\n\n"
             . "vielen Dank für Ihre Schadensmeldung, die am $eingang Uhr bei uns eingegangen ist.\n\n"
-            . "Wir melden uns innerhalb unserer Öffnungszeiten (Montag bis Freitag, 07:30 bis 17:30 Uhr) telefonisch bei Ihnen "
+            . "Wir melden uns innerhalb unserer Öffnungszeiten (Montag bis Freitag, 07:30 bis 17:00 Uhr) telefonisch bei Ihnen "
             . "und vereinbaren einen Besichtigungstermin. Fotos vom Schaden können Sie gern als Antwort auf diese E-Mail senden.\n\n"
             . "Bitte unterschreiben Sie bis dahin nichts, was Ihnen die Versicherung der Gegenseite vorlegt.\n\n"
             . "In dringenden Fällen erreichen Sie uns unter 06103 / 22011.\n\n"
