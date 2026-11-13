@@ -1,0 +1,17 @@
+{
+  "name": "komp-onepager-werkzeuge",
+  "private": true,
+  "description": "Tests und Paketbau für den Komp OnePager (läuft unter Windows, macOS und Linux)",
+  "type": "module",
+  "scripts": {
+    "test": "node test.mjs",
+    "test:formular": "node formulartest.mjs",
+    "paket": "node paket.mjs",
+    "vorschau": "node vorschau.mjs"
+  },
+  "devDependencies": {
+    "archiver": "7.0.1",
+    "axe-core": "4.10.2",
+    "playwright": "1.63.0"
+  }
+}
