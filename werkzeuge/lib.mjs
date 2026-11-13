@@ -44,6 +44,6 @@ export function protokoll() {
       else { fehler++; console.log('  ✘ ' + text + (detail ? ' → ' + detail : '')); }
     },
     abschnitt: (t) => console.log('\n' + t),
-    get fehler() { return fehler; },
+    get anzahlFehler() { return fehler; },
   };
 }

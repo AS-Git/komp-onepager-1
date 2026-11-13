@@ -112,5 +112,5 @@ try {
   for (const f of fs.readdirSync(temp)) if (f.startsWith('komp-formular-')) fs.rmSync(path.join(temp, f), { force: true });
 }
 
-console.log(p.fehler ? `\n✘ ${p.fehler} Prüfung(en) fehlgeschlagen.` : '\n✔ Formular und Spamschutz in Ordnung.');
-process.exit(p.fehler ? 1 : 0);
+console.log(p.anzahlFehler ? `\n✘ ${p.anzahlFehler} Prüfung(en) fehlgeschlagen.` : '\n✔ Formular und Spamschutz in Ordnung.');
+process.exit(p.anzahlFehler ? 1 : 0);

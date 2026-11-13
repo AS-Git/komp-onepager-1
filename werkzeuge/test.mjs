@@ -120,7 +120,7 @@ try {
   server.stop();
 }
 
-console.log(p.fehler ? `\n✘ ${p.fehler} Prüfung(en) fehlgeschlagen. Bitte nicht veröffentlichen.` : '\n✔ Alle Prüfungen bestanden.');
-process.exit(p.fehler ? 1 : 0);
+console.log(p.anzahlFehler ? `\n✘ ${p.anzahlFehler} Prüfung(en) fehlgeschlagen. Bitte nicht veröffentlichen.` : '\n✔ Alle Prüfungen bestanden.');
+process.exit(p.anzahlFehler ? 1 : 0);
 
 function seiteEndet(url, anker) { return url.endsWith('/' + anker); }
