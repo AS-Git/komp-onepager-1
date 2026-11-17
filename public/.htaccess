@@ -6,6 +6,10 @@ Options -Indexes
 # Immer HTTPS (Formulardaten nie unverschlüsselt übertragen)
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Alte Unterseite der bisherigen Website auf die Startseite (direkt auf HTTPS, ohne Zwischenschritt)
+  RewriteRule ^kfz-sachverstaendigung/?$ https://%{HTTP_HOST}/ [R=301,L,NC,QSD]
+
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
